@@ -1,0 +1,27 @@
+.dialogsContainer {
+    display: flex;
+    height: 100vh;
+    border-right: 1px solid gray;
+}
+.colDialogs {
+    width: 20%;
+    min-width: 150px;
+    margin: 10px;
+    border-right: 1px solid gray
+}
+.colMessages {
+    width: 80%;
+    margin: 15px;
+}
+.form {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.input {
+    display: block;
+    width: 400px;
+    height: 25px;
+    border: 0.5px solid gray;
+    border-radius: 5px;
+}

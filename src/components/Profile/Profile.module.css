@@ -1,0 +1,17 @@
+
+.avatar {
+    width: 150px;
+    border-radius: 50%;
+}
+.profileInfo {
+    display: inline-flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+    padding: 20px;
+}
+
+.name {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}

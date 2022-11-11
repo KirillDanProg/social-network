@@ -1,0 +1,51 @@
+.sidebar {
+    grid-area: 1 / 1 / 3 / 3;
+    background: linear-gradient(120deg, #7bc6cc, #be93c5);
+    min-width: 200px;
+    height: 100vh;
+    color: white;
+    text-align: center;
+}
+
+.list {
+    margin: 20px;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+}
+
+.item {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.active {
+    display: inline-block;
+    color: deeppink;
+    transition: 0.4s;
+    transform: scale(1.2);
+}
+
+.sidebarBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.sidebarBox img {
+    width: 45px;
+    margin-top: 10px;
+    border-radius: 50%;
+
+}
+
+.sidebarBox span {
+
+}

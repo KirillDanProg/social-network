@@ -1,0 +1,26 @@
+.message {
+    display: inline-block;
+    max-width: 200px;
+    word-wrap: break-word;
+    margin: 15px;
+    padding: 10px 15px;
+    border-radius: 30px;
+    background-color: rgb(228, 228, 228);
+}
+.messageContainer {
+    display: flex;
+    padding: 10px;
+}
+.messageContainer img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.messageContainer:nth-child(even) {
+    justify-content: end;
+}
+.messageContainer:nth-child(even) img {
+    order: 1;
+}
+

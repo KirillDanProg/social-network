@@ -1,0 +1,31 @@
+.form {
+    margin-top: 20px;
+}
+
+.input {
+    border: 1px solid purple;
+    border-radius: 5px;
+    padding: 10px;
+
+}
+
+.postContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.postImg {
+    width: 60px;
+    border-radius: 50%;
+}
+
+ .error {
+    border: 2px solid red;
+}
+.errorMessage {
+    margin-left: 10px;
+    color: red;
+}
