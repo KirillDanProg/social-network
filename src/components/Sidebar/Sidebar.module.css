@@ -2,7 +2,7 @@
     grid-area: 1 / 1 / 3 / 3;
     background: linear-gradient(120deg, #7bc6cc, #be93c5);
     min-width: 200px;
-    height: 100vh;
+    min-height: 100vh;
     color: white;
     text-align: center;
 }
