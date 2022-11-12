@@ -1,13 +1,31 @@
 .dialogsContainer {
     display: flex;
-    height: 100vh;
+    height: 90vh;
     border-right: 1px solid gray;
+    position: relative;
 }
 .colDialogs {
     width: 20%;
     min-width: 150px;
-    margin: 10px;
     border-right: 1px solid gray
+}
+.dialogBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    cursor: pointer;
+}
+.dialogBox:hover {
+    transition: 0.1s;
+    border-radius: 5%;
+    background-color: rgba(5,4,6,0.10);
+}
+.dialogBox:active {
+    transition: 0.3s;
+    background-color: rgba(5,4,6,0.20);
 }
 .colMessages {
     width: 80%;
@@ -24,4 +42,10 @@
     height: 25px;
     border: 0.5px solid gray;
     border-radius: 5px;
+}
+
+.sendMessageBox {
+    position: absolute;
+    bottom: 20px;
+    margin: 0 auto;
 }
