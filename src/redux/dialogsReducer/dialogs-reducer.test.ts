@@ -6,7 +6,7 @@ let startState: InitialStateType
 beforeEach(() => {
     startState = {
         dialogsData: [] as DialogType[],
-        messagesData: null
+        messagesData: {} as MessageDataType
     }
 })
 
