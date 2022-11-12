@@ -1,12 +1,12 @@
-import React, {useEffect} from "react";
+import React, {memo, useEffect} from "react";
 import {UsersPropsType} from "./UsersContainer";
 import styles from './Users.module.css'
 import {User} from "./User";
 import {Pagination} from "../../common/Pagination";
 
-export const Users = (props: UsersPropsType) => {
+export const Users = memo((props: UsersPropsType) => {
 
-    const {getUsers, users, changePage, follow, unfollow} = props
+    const {getUsers, users, changePage} = props
 
     useEffect(() => {
         getUsers(users.page, users.count)
@@ -36,7 +36,7 @@ export const Users = (props: UsersPropsType) => {
         </>
 
     )
-}
+})
 
 
 
