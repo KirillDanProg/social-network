@@ -12,5 +12,14 @@ const instance = axios.create({
 export const dialogsAPI = {
     fetchDialogs: () => {
         return instance.get(`dialogs`)
+    },
+    fetchMessages: (id: number) => {
+        return instance.get(`dialogs/${id}/messages`)
+    },
+    addUserMessage: (id: number, message: string) => {
+        return instance.post(`dialogs/${id}/messages`, {body: message})
+    },
+    deleteUserMessage: (messageId: string) => {
+        return instance.delete(`dialogs/messages/${messageId}`)
     }
 }
