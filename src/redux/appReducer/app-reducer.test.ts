@@ -5,7 +5,8 @@ beforeEach(() => {
     initialState = {
         isInit: true,
         error: null,
-        status: "idle"
+        status: "idle",
+        theme: "light" as "dark" | 'light'
     }
 })
 

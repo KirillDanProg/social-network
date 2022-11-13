@@ -26,7 +26,7 @@ type MapDispatchType = {
     setTotal: (total: number) => void
 }
 
-class UsersContainer extends React.Component<UsersPropsType> {
+class UsersContainer extends React.PureComponent<UsersPropsType> {
     componentDidMount() {
         const page = this.props.users.page
         const count = this.props.users.count
@@ -42,9 +42,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
 
 const mapStateToProps = (state: RootState): MapStateType => {
     return {
-
         users: getUsers(state),
-
     }
 }
 const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, void, AnyAction>): MapDispatchType => {

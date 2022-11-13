@@ -3,7 +3,7 @@ import styles from "./Users.module.css";
 import {NavLink} from "react-router-dom";
 import {useAppDispatch} from "../../utils/hooks/reduxHooks";
 import {followTC, unfollowTC} from "../../redux/usersReducer/users-reducer";
-import {Avatar} from "../Avatar";
+import {Avatar} from "../../common/superComponents/Avatar";
 import userAvatar from "../../assets/user.png"
 
 

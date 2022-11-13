@@ -1,27 +1,78 @@
 .dialogsContainer {
     display: flex;
-    height: 100vh;
-    border-right: 1px solid gray;
+    height: 90vh;
+    position: relative;
 }
+
 .colDialogs {
     width: 20%;
     min-width: 150px;
-    margin: 10px;
     border-right: 1px solid gray
 }
+
+.dialogBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dialogBox:hover {
+    transition: 0.1s;
+    border-radius: 5%;
+    background-color: rgba(5, 4, 6, 0.10);
+}
+
+.dialogBox:active {
+    transition: 0.3s;
+    background-color: rgba(5, 4, 6, 0.20);
+}
+
 .colMessages {
+    display: flex;
     width: 80%;
     margin: 15px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
 }
+
 .form {
     display: inline-flex;
     justify-content: center;
     align-items: center;
 }
+
 .input {
     display: block;
     width: 400px;
     height: 25px;
     border: 0.5px solid gray;
     border-radius: 5px;
+}
+
+.sendMessageBox {
+    position: absolute;
+    bottom: 20px;
+    margin: 0 auto;
+}
+
+.icon {
+    opacity: 0.6;
+}
+
+.icon:hover {
+    color: rgba(255, 20, 0);
+}
+
+* > .icon,
+*:hover > .fa.fa-hover-hidden {
+    visibility: hidden;
+}
+
+*:hover > .icon {
+    visibility: visible;
 }

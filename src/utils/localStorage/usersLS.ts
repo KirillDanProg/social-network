@@ -1,5 +1,9 @@
 export const addFriendToLocalStorage = (value: number) => {
     const localStorageData = localStorage.getItem("friends")
+    if(!localStorageData) {
+        localStorage.setItem("friends", JSON.stringify([]))
+    }
+
     if (localStorageData) {
         const _friendsIdArr = JSON.parse(localStorageData)
         _friendsIdArr.push(value)

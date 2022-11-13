@@ -3,11 +3,9 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
-    grid-area: 1 / 3 / 2 / 13;
+    grid-area: 1 / 1 / 2 / 13;
     padding: 0 10px;
-    background: linear-gradient(120deg, #7bc6cc, #be93c5);
     color: palegreen;
-    border-radius: 0 0 0 10px;
 }
 
 .logo {
