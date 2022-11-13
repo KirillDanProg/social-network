@@ -1,7 +1,7 @@
 import React, {memo, useEffect} from "react";
 import {useAppSelector} from "../../utils/hooks/reduxHooks";
 import {User} from "../Users/User";
-import {Flex} from "../Flex";
+import {Flex} from "../../common/superComponents/Flex";
 import {getFriendsTC} from "../../redux/usersReducer/users-reducer";
 import {useAppDispatch} from "../../common/hooks";
 
