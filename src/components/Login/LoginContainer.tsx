@@ -1,11 +1,12 @@
 import React from "react"
-import Login, {LoginDataType} from "./Login";
 import {connect} from "react-redux";
 import { RootState} from "../../redux/store";
 import {AnyAction} from "redux";
 import {loginTC} from "../../redux/authReducer/authReducer";
 import {ThunkDispatch} from "redux-thunk";
 import {Navigate} from "react-router-dom";
+import {Login, LoginDataType} from "./Login";
+import {PositionedComponent} from "../../common/superComponents/PositionComponent";
 
 
 type LoginContainerType = MSTPType & MDTPType
@@ -14,14 +15,14 @@ class LoginContainer extends React.Component<LoginContainerType> {
 
     render() {
         return (
-            <>
+            <PositionedComponent center>
                 {
                     !this.props.login ? <Login login={this.props.login} authorization={this.props.authorization}/>
                         :
                      <Navigate to={"/profile"}/>
 
                 }
-            </>
+            </PositionedComponent>
         )
     }
 }
