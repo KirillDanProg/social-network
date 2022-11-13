@@ -29,13 +29,20 @@ export const dialogsReducer = (state: InitialStateType = initialState, action: D
             return {
                 ...state, messagesData: {
                     ...state.messagesData,
-                   [String(action.id)] : [...action.messages]
+                    [String(action.id)]: [...action.messages]
                 }
             }
         case ADD_MESSAGE:
             return {
                 ...state, messagesData: {
-                    [String(action.id)] : [...state.messagesData[String(action.id)], {...action.messageData}]
+                    [String(action.id)]: [...state.messagesData[String(action.id)], {...action.messageData}]
+                }
+            }
+        case DELETE_MESSAGE:
+            return {
+                ...state, messagesData: {
+                    [String(action.userId)]: state.messagesData[action.userId]
+                        .filter(m => m.id !== action.messageId)
                 }
             }
         default:
@@ -108,9 +115,12 @@ export const addUserMessageTC = (id: number, message: string): AppThunk => async
         console.log(e)
     }
 }
-export const deleteUserMessageTC = (messageId: string): AppThunk => async dispatch => {
+export const deleteUserMessageTC = (userId: number, messageId: string): AppThunk => async dispatch => {
     try {
         const res = await dialogsAPI.deleteUserMessage(messageId)
+        if (res.data.resultCode === 0) {
+            dispatch(deleteUserMessageAC(userId, messageId))
+        }
     } catch (e) {
         console.log(e)
     }
