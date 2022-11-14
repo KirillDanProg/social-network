@@ -18,6 +18,7 @@ beforeEach(() => {
             followed: false,
             lookingForAJob: true,
             lookingForAJobDescription: "string",
+            aboutMe: "some text"
         },
     }
 })

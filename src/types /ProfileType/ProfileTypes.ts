@@ -1,4 +1,3 @@
-
 export type ProfileType = {
     profileData: ProfileDataType
     postsData: Array<PostDataType>
@@ -16,7 +15,7 @@ export type ProfileDataTypeAPI = {
     fullName: string
     contacts?: {
         github: string
-        vk:string
+        vk: string
         facebook: string
         instagram: string
         twitter: string
@@ -24,8 +23,8 @@ export type ProfileDataTypeAPI = {
         youtube: string
         mainLink: string
     }
-
-    photos: { small: string | null, large: string | null}
+    aboutMe: string
+    photos: { small: string | null, large: string | null }
 }
 export type PostDataType = {
     id: string
