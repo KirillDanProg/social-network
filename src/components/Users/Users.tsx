@@ -3,6 +3,7 @@ import {UsersPropsType} from "./UsersContainer";
 import styles from './Users.module.css'
 import {User} from "./User";
 import {Pagination} from "../../common/Pagination";
+import {Search} from "../../common/Search";
 
 export const Users = memo((props: UsersPropsType) => {
 
@@ -14,6 +15,7 @@ export const Users = memo((props: UsersPropsType) => {
 
     return (
         <>
+            <Search />
             <Pagination page={users.page}
                         count={users.count}
                         total={users.total}

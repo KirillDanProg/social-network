@@ -1,9 +1,9 @@
-import React from "react";
+import React, {memo} from "react";
 import styles from "./Profile.module.css"
 import ProfileInfoContainer from "./ProfileInfoContainer";
 import PostsContainer from "./posts/PostsContainer";
 
-export const ProfilePage = () => {
+export const ProfilePage = memo(() => {
 
     return (
         <div className={styles.profile}>
@@ -11,6 +11,6 @@ export const ProfilePage = () => {
             <PostsContainer/>
         </div>
     )
-}
+})
 
 

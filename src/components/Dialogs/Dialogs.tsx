@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {memo, useState} from "react";
 import styles from "./Dialogs.module.css"
 import DialogsForm from "./Message/DialogsForm";
 import {addUserMessageTC, DialogType} from "../../redux/dialogsReducer/dialogs-reducer";
@@ -8,7 +8,7 @@ import {Dialog} from "./Dialog";
 import {DialogMessages} from "./DialogMessages";
 import {useAppDispatch} from "../../utils/hooks/reduxHooks";
 
-export const Dialogs = () => {
+export const Dialogs = memo(() => {
 
     const dispatch = useAppDispatch()
     const dialogItems = useSelector<RootState, DialogType[]>(state => state.dialogs.dialogsData)
@@ -51,6 +51,6 @@ export const Dialogs = () => {
             </div>
         </div>
     )
-}
+})
 
 
