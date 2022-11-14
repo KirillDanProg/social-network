@@ -1,6 +1,5 @@
 import {AnyAction, applyMiddleware, combineReducers, compose} from "redux";
 import profileReducer, {ProfileActionsType} from "./profileReducer/profile-reducer";
-import sidebarReducer from "./sidebar-reducer";
 import {UsersActionsType, usersReducer} from "./usersReducer/users-reducer";
 import {AuthActionsType, authReducer} from "./authReducer/authReducer";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk'
@@ -11,7 +10,6 @@ import { legacy_createStore as createStore} from 'redux'
 const rootReducer = combineReducers({
     dialogs: dialogsReducer,
     profile: profileReducer,
-    sidebar: sidebarReducer,
     users: usersReducer,
     auth: authReducer,
     application: appReducer

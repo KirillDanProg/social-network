@@ -1,10 +1,8 @@
-import {v1} from "uuid";
-import img from "../../assets/images.jpeg"
 import {PostDataType, ProfileDataType, ProfileType} from "../../types /ProfileType/ProfileTypes";
-import {userAPI} from "../../api/api";
 import {AppThunk} from "../store";
 import {ResultCode} from "../../api/api-types";
 import {profileAPI} from "../../api/profile-api";
+import {userAPI} from "../../api/users-api";
 
 export type ProfileActionsType = ReturnType<typeof deletePostAC> |
     ReturnType<typeof updatePostTextAC> |
@@ -30,14 +28,8 @@ const initialState: ProfileType = {
 
 const profileReducer = (state: ProfileType = initialState, action: ProfileActionsType): ProfileType => {
     switch (action.type) {
-        case ADD_POST:
-            const newPost = {
-                id: v1(),
-                postText: action.postText,
-                likes: 0,
-                img: img
-            }
-            return {...state, postsData: [...state.postsData, newPost]}
+        // case ADD_POST:
+        //     return {...state, postsData: [...state.postsData, newPost]}
         case DELETE_POST:
             return {...state, postsData: state.postsData.filter(post => post.id !== action.payload)}
         case SET_PROFILE_DATA:

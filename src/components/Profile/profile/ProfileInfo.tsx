@@ -8,6 +8,7 @@ import {Avatar} from "../../../common/superComponents/Avatar";
 import defaultUserImg from "../../../assets/user.png"
 import {updateUserPhotoTC} from "../../../redux/profileReducer/profile-reducer";
 import {useAppDispatch} from "../../../utils/hooks/reduxHooks";
+import {ProfileDescription} from "./ProfileDescription";
 
 
 type ProfileInfoType = {
@@ -28,20 +29,23 @@ const ProfileInfo: FC<ProfileInfoType> = (props) => {
         const photo = profileData.photos.large || defaultUserImg
 
         const uploadPhotoHandler = (file: File) => {
-           dispatch(updateUserPhotoTC(file))
+            dispatch(updateUserPhotoTC(file))
         }
         return (
             <div className={styles.profileInfo}>
-                <Avatar width={"200px"}
-                        profile={"true"}
-                        shape={"square"}
-                        src={photo}
-                        uploadPhoto={uploadPhotoHandler}
-                />
                 <div>
+                    <Avatar width={"200px"}
+                            profile={"true"}
+                            shape={"square"}
+                            src={photo}
+                            uploadPhoto={uploadPhotoHandler}
+                    />
                     <div className={styles.name}>{profileData.fullName}</div>
-                    <UserStatus value={profileData.status} callback={changeStatusHandler}/>
                 </div>
+                <UserStatus
+                    value={profileData.status}
+                    callback={changeStatusHandler}/>
+                <ProfileDescription/>
             </div>
         )
     } else {
@@ -55,7 +59,7 @@ type UserStatusType = {
 }
 export const UserStatus: FC<UserStatusType> = (props) => {
     return (
-        <div>
+        <div className={styles.status}>
             <EditableSpan value={props.value} callback={props.callback}/>
         </div>
     )

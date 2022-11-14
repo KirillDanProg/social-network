@@ -5,7 +5,7 @@ import styled from "styled-components";
 const StyledTextField = styled.input<any>`
   width: ${props => props.width};
   padding: ${props => props.padding || "8px 20px"};
-  border: none;
+  border: ${props => props.border || "none"};
   border-radius: ${props => props.borderRadius || "5px"};
   margin-bottom: 6px;
   font-size: 20px;
