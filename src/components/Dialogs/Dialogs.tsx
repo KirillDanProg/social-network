@@ -46,9 +46,7 @@ export const Dialogs = () => {
                     id && <DialogMessages  data={senderData}/>
                 }
 
-                <div className={styles.sendMessageBox}>
                     <DialogsForm onSubmit={addMessageHandler}/>
-                </div>
 
             </div>
         </div>

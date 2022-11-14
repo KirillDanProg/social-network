@@ -23,7 +23,6 @@ export const Post: FC<PostPropsType> = (props) => {
             <img className={styles.postImg} src={props.img} alt={"#"}/>
             <div className={styles.postText}>{props.postText}</div>
             <span className={styles.postLikes}>
-                {/*<FontAwesomeIcon icon="fa-solid fa-thumbs-up"/>*/}
                 {props.likes}
             </span>
             <button onClick={deletePostHandler}>delete</button>

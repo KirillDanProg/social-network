@@ -3,9 +3,12 @@ import styled from "styled-components";
 
 
 type ComposeComponentType = {
-    center: string
+    width: string
+    center: string,
+    bottom: string
 }
 const StyledPositionComponent = styled.div<ComposeComponentType>`
+  width: ${props => props.width || "100%"};
 
   ${props => props.center && `
           position: absolute;
@@ -15,6 +18,13 @@ const StyledPositionComponent = styled.div<ComposeComponentType>`
           right: 0;
           transform: translate(-50%, -50%)
     `}
+  ${props => props.bottom && `
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translate(-50%, 0)
+          
+  `}
 
 `
 
