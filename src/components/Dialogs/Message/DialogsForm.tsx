@@ -1,6 +1,9 @@
 import React, {FC} from 'react';
 import styles from "../Dialogs.module.css";
 import {SubmitHandler, useForm} from "react-hook-form";
+import {TextField} from "../../../common/superComponents/TextField";
+import {Button} from "../../../common/superComponents/Button";
+import {PositionedComponent} from "../../../common/superComponents/PositionComponent";
 
 type DialogsFormType = {
     message: string
@@ -17,13 +20,21 @@ export const DialogsForm: FC<DialogsPropsType> = ({onSubmit}) => {
 
 
     return (
-        <form onSubmit={handleSubmit(onSubmitHandler)} className={styles.form}>
-            <input type={"text"} {...register("message", {required: true})}  />
+        <PositionedComponent bottom>
+            <form onSubmit={handleSubmit(onSubmitHandler)} className={styles.form}>
+                <TextField width="70%"
+                           focus={0}
+                           autocomplete="off"
+                           borderRadius={"20px"}
+                           type={"text"}
+                           {...register("message", {required: true})}  />
 
-            {errors.message && <span>This field is required</span>}
+                {errors.message && <span>This field is required</span>}
 
-            <input type="submit"/>
-        </form>
+                <Button type="submit">send</Button>
+            </form>
+        </PositionedComponent>
+
     );
 };
 
