@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./Profile.module.css"
 import ProfileInfoContainer from "./ProfileInfoContainer";
-import PostsContainer from "./Posts/PostsContainer";
+import PostsContainer from "./posts/PostsContainer";
 
-export const Profile = () => {
+export const ProfilePage = () => {
 
     return (
         <div className={styles.profile}>

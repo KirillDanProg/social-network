@@ -6,7 +6,7 @@ import {changeUserStatusTC, getProfileDataTC, getUserStatusTC} from "../../redux
 import {compose} from "redux";
 import {ThunkDispatch} from "redux-thunk";
 import {withRouter} from "../../hoc/withRouter";
-import ProfileInfo from "./ProfileInfo";
+import ProfileInfo from "./profile/ProfileInfo";
 import {getAuthId, getProfileData} from "../../selectors/profile-selector";
 
 type ParamsType = {

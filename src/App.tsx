@@ -3,7 +3,7 @@ import './App.css';
 import {BrowserRouter, Route, Routes,} from "react-router-dom";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {Friends} from "./components/Friends/Friends";
-import {Profile} from "./components/Profile/Profile";
+import {ProfilePage} from "./components/Profile/ProfilePage";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import LoginContainer from "./components/Login/LoginContainer";
@@ -37,7 +37,7 @@ const App = () => {
                         <Sidebar/>
                         <StyledMainContainer className="AppContent">
                             <Routes>
-                                <Route path="/profile" element={<Profile/>}>
+                                <Route path="/profile" element={<ProfilePage/>}>
                                     <Route path={":userId"}/>
                                 </Route>
                                 <Route path="/dialogs" element={<Dialogs/>}/>
