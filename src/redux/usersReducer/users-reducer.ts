@@ -8,6 +8,7 @@ import {
     removeFriendFromLocalStorage
 } from "../../utils/localStorage/usersLS";
 import {userAPI} from "../../api/users-api";
+import {removeDialogAC} from "../dialogsReducer/dialogs-reducer";
 
 export type UserType = {
     "name": string
@@ -175,6 +176,10 @@ export const unfollowTC = (id: number) => {
                 addRemoveFriendTC("remove", id)
                 dispatch(getFriendsTC())
                 dispatch(setDisableAC(null))
+
+                // remove from dialogs
+                // fake delete request
+                dispatch(removeDialogAC(id))
             }
         })
     }
@@ -183,7 +188,7 @@ export const getFriendsTC = (): AppThunk => async (dispatch) => {
     const friendsId = getFriendsFromLocalStorage()
     const friendsArr = [] as ProfileDataType[]
     if (friendsId) {
-        const res = await Promise.allSettled(friendsId.map(async (id) => {
+         await Promise.allSettled(friendsId.map(async (id) => {
            const friendItem =  await userAPI.getProfileData(id)
             friendsArr.push(friendItem)
         }))
