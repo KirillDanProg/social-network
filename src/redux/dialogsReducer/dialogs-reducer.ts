@@ -111,7 +111,6 @@ export const fetchDialogsTC = (): AppThunk => async dispatch => {
         const filteredDialogs = filterUsers(res.data, JSON.parse(friends))
 
         dispatch(fetchDialogsAC(filteredDialogs))
-
     } catch (e) {
         console.log(e)
     }

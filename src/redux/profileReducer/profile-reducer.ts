@@ -97,20 +97,13 @@ export const updateUserPhotoAC = (photos: any) => {
     } as const
 }
 // THUNK CREATORS
-export const getProfileDataTC = (userId: number): AppThunk => dispatch => {
-    return userAPI.getProfileData(userId)
-        .then(data => {
-            profileAPI.getUserStatus(userId)
-                .then(status => {
-                    const profileData = {...data, status}
-                    dispatch(setProfileDataAC(profileData))
-                })
-                .catch(err => console.warn(err))
-        })
-        .catch(e => {
-            console.warn(e.message)
-        })
+export const getProfileDataTC = (userId: number): AppThunk => async dispatch => {
+    const data = await userAPI.getProfileData(userId)
+    const status = await dispatch(getUserStatusTC(data.userId))
+    const profileData = {...data, status}
+    dispatch(setProfileDataAC(profileData))
 }
+
 
 export const changeUserStatusTC = (status: string): AppThunk => dispatch => {
     profileAPI.updateUserStatus(status)
@@ -121,17 +114,16 @@ export const changeUserStatusTC = (status: string): AppThunk => dispatch => {
         })
         .catch(err => console.warn(err))
 }
-export const getUserStatusTC = (id: number): AppThunk => dispatch => {
-    profileAPI.getUserStatus(id)
-        .then(data => dispatch(getUserStatusAC(data)))
-        .catch(err => console.warn(err))
+export const getUserStatusTC = (id: number): AppThunk => async () => {
+    return await profileAPI.getUserStatus(id)
+
 }
 
 export const updateUserPhotoTC = (photo: File): AppThunk => async dispatch => {
     try {
         const res = await profileAPI.updateUserPhoto(photo)
-        if(res.data.message)
-        dispatch(updateUserPhotoAC(res.data.data.photos))
+        if (res.data.message)
+            dispatch(updateUserPhotoAC(res.data.data.photos))
     } catch (e) {
         console.log(e)
     }
