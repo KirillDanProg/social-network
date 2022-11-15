@@ -24,7 +24,7 @@ export const DialogMessages = (props: { data: DialogType }) => {
         <div>
             {sandedMessages?.map(m => {
                 return (
-                   <Message messageData={m} deleteMessage={deleteMessageHandler}/>
+                   <Message key={m.id} messageData={m} deleteMessage={deleteMessageHandler}/>
                 )
             })}
         </div>

@@ -21,5 +21,8 @@ export const dialogsAPI = {
     },
     deleteUserMessage: (messageId: string) => {
         return instance.delete(`dialogs/messages/${messageId}`)
+    },
+    refreshDialog: (userId: number) => {
+        return instance.put(`dialogs/${userId}`)
     }
 }

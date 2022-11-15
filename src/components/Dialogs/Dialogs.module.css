@@ -1,16 +1,16 @@
 .dialogsContainer {
     display: flex;
-    height: 90vh;
+    min-height: 90vh;
     position: relative;
 }
 
 .colDialogs {
     width: 20%;
-    min-width: 150px;
     border-right: 1px solid gray
 }
 
 .dialogBox {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -56,8 +56,14 @@
     border-radius: 5px;
 }
 
-
-
+.removeIcon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.removeIcon path {
+   fill: rgba(255,20,0,0.69);
+}
 .icon {
     opacity: 0.6;
 }
@@ -73,4 +79,13 @@
 
 *:hover > .icon {
     visibility: visible;
+}
+
+@media screen and (max-width: 400px) {
+    .colDialogs {
+        width: 100%;
+    }
+    .colMessages {
+        display: none;
+    }
 }

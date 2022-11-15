@@ -3,7 +3,7 @@ import profileReducer, {ProfileActionsType} from "./profileReducer/profile-reduc
 import {UsersActionsType, usersReducer} from "./usersReducer/users-reducer";
 import {AuthActionsType, authReducer} from "./authReducer/authReducer";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk'
-import {appReducer} from "./appReducer/app-reducer";
+import {AppActionType, appReducer} from "./appReducer/app-reducer";
 import {DialogsActionTypes, dialogsReducer} from "./dialogsReducer/dialogs-reducer";
 import { legacy_createStore as createStore} from 'redux'
 
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = ThunkDispatch<RootState, unknown, AppActionsType>
-export type AppActionsType = UsersActionsType | DialogsActionTypes | AuthActionsType | ProfileActionsType
+export type AppActionsType = UsersActionsType | DialogsActionTypes | AuthActionsType | ProfileActionsType | AppActionType
 
 export type AppThunk<ReturnType = any> = ThunkAction<ReturnType,
     RootState,
