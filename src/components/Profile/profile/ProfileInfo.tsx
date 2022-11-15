@@ -7,8 +7,14 @@ import Loader from "../../../common/Loader/Loader";
 import {Avatar} from "../../../common/superComponents/Avatar";
 import defaultUserImg from "../../../assets/user.png"
 import {updateUserPhotoTC} from "../../../redux/profileReducer/profile-reducer";
-import {useAppDispatch} from "../../../utils/hooks/reduxHooks";
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks/reduxHooks";
 import {ProfileDescription} from "./ProfileDescription";
+import {Button} from "../../../common/superComponents/Button";
+import {faEnvelope} from "@fortawesome/free-solid-svg-icons/faEnvelope";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Flex} from "../../../common/superComponents/Flex";
+import {useNavigate} from "react-router-dom";
+import {refreshDialogTC} from "../../../redux/dialogsReducer/dialogs-reducer";
 
 
 type ProfileInfoType = {
@@ -19,9 +25,15 @@ type ProfileInfoType = {
 const ProfileInfo: FC<ProfileInfoType> = (props) => {
 
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+    const profileId = useAppSelector(state => state.profile.profileData.userId)
 
     const changeStatusHandler = (status: string) => {
         props.changeStatus(status)
+    }
+    const sendMessageHandler = () => {
+        navigate("/dialogs")
+        dispatch(refreshDialogTC(profileId))
     }
     if (props.authID && props.profileData.userId) {
 
@@ -33,26 +45,42 @@ const ProfileInfo: FC<ProfileInfoType> = (props) => {
         }
         return (
             <div className={styles.profileInfo}>
-                <div>
+                <Flex direction={"column"} gap={"10px"}>
+
                     <Avatar width={"200px"}
                             profile={"true"}
                             shape={"square"}
                             src={photo}
                             uploadPhoto={uploadPhotoHandler}
                     />
+
                     <div className={styles.name}>{profileData.fullName}</div>
-                </div>
-                <UserStatus
-                    value={profileData.status}
-                    callback={changeStatusHandler}/>
-                <ProfileDescription/>
+                    <Button>
+                        Add to friends
+                        <FontAwesomeIcon icon={["fas", "user-group"]} />
+                    </Button>
+
+                    <Button onClick={sendMessageHandler}>
+                        Send message
+                        <FontAwesomeIcon size={"lg"} icon={faEnvelope} />
+                    </Button>
+                </Flex>
+                <>
+                    <UserStatus
+                        value={profileData.status}
+                        callback={changeStatusHandler}
+                    />
+
+                    <ProfileDescription/>
+                </>
             </div>
         )
     } else {
         return <Loader/>
     }
-
 }
+
+
 type UserStatusType = {
     value: string | null
     callback: (value: string) => void
