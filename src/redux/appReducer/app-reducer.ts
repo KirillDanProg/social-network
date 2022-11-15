@@ -10,12 +10,13 @@ const initialState = {
     status: "idle" as RequestStatusType,
     error: null as string | null,
     isInit: false,
-    theme: "light" as ThemeAppType
+    theme: "light" as ThemeAppType,
+    mobile: false
 }
 type ThemeAppType = "dark" | "light"
 export type InitStateType = typeof initialState
 
-export const appReducer = (state: InitStateType = initialState, action: ActionType): InitStateType => {
+export const appReducer = (state: InitStateType = initialState, action: AppActionType): InitStateType => {
     switch (action.type) {
         case "APP/SET-INITIALIZING":
             return {
@@ -36,15 +37,20 @@ export const appReducer = (state: InitStateType = initialState, action: ActionTy
             return {
                 ...state, theme: action.themeValue
             }
+        case "SET-MOBILE-LAYOUT":
+            return {
+                ...state, mobile: !state.mobile
+            }
         default:
             return state
     }
 }
 
-export type ActionType = ReturnType<typeof setAppInitializing>
+export type AppActionType = ReturnType<typeof setAppInitializing>
     | ReturnType<typeof setAppStatus>
     | ReturnType<typeof setAppError>
     | ReturnType<typeof setAppTheme>
+    | ReturnType<typeof setMobileLayout>
 
 
 export const setAppInitializing = (initStatus: boolean) => {
@@ -74,6 +80,11 @@ export const setAppTheme = (themeValue: ThemeAppType) => {
         themeValue
     } as const
 }
+export const setMobileLayout = () => {
+    return {
+        type: "SET-MOBILE-LAYOUT",
+    } as const
+}
 
 export const appInit = (): AppThunk => (dispatch, getState) => {
 
@@ -86,12 +97,11 @@ export const appInit = (): AppThunk => (dispatch, getState) => {
     dispatch(getAppThemeTC())
 
     dispatch(authMeTC())
-        .then(res => {
+        .then(() => {
             const userID = getState().auth.id
             dispatch(getProfileDataTC(userID as number))
-                .then(res => {
+                .then(() => {
                     dispatch(setAppInitializing(true))
-
                 })
         })
     dispatch(fetchDialogsTC())
@@ -107,8 +117,8 @@ export const setAppThemeTC = (themeValue: ThemeAppType): AppThunk => dispatch =>
 }
 
 export const getAppThemeTC = (): AppThunk => dispatch => {
-   const theme = localStorage.getItem("appTheme")
-    if(theme) {
+    const theme = localStorage.getItem("appTheme")
+    if (theme) {
         dispatch(setAppTheme(theme as ThemeAppType))
     }
 }
