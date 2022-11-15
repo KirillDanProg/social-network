@@ -1,16 +1,24 @@
-import React, {memo} from "react";
+import React, {FC, memo} from "react";
 import styles from "./Profile.module.css"
-import ProfileInfoContainer from "./ProfileInfoContainer";
-import PostsContainer from "./posts/PostsContainer";
+import AdminProfile from "./admin/AdminProfile";
+import {GuestProfile} from "./guest/GuestProfile";
 
-export const ProfilePage = memo(() => {
 
+type ProfilePagePropsType = {
+    idFromURL?: number
+}
+
+export const ProfilePage: FC<ProfilePagePropsType> = memo(({idFromURL}) => {
     return (
         <div className={styles.profile}>
-            <ProfileInfoContainer/>
-            <PostsContainer/>
+            {
+                idFromURL ?
+                    <GuestProfile idFromURL={idFromURL}/>
+                    :
+                    <AdminProfile/>
+            }
+
         </div>
     )
 })
-
 
