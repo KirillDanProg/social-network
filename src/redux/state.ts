@@ -84,3 +84,4 @@
 //     ReturnType<typeof setProfileDataAC>
 //
 //
+export {}
