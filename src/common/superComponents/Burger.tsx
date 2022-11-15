@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import {device} from "../mediaqueries/media";
-import {setMobileLayout} from "../../redux/appReducer/app-reducer";
+import { toggleSidebar} from "../../redux/appReducer/app-reducer";
 import {useAppDispatch} from "../../utils/hooks/reduxHooks";
 
 
@@ -26,7 +26,7 @@ export const Burger = () => {
     const dispatch = useAppDispatch()
 
     const showSidebar = () => {
-        dispatch(setMobileLayout())
+        dispatch(toggleSidebar())
     }
 
     return (

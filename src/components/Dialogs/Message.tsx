@@ -7,6 +7,7 @@ import {DialogMessage} from "./Message/DialogMessage";
 import React, {FC} from "react";
 import {MessageType} from "../../types /DialogsType/DialogsTypes";
 import {Indicator} from "../../common/superComponents/Indicator";
+import {faTrash} from "@fortawesome/free-solid-svg-icons/faTrash";
 
 type MessagePropsType = {
     messageData: MessageType
@@ -15,12 +16,13 @@ type MessagePropsType = {
 
 export const Message: FC<MessagePropsType> = ({messageData, deleteMessage}) => {
 
-    const profileMePhoto = useAppSelector(state => state.profile.profileData.photos.small)
+    const profileMePhoto = useAppSelector(state => state.userAccess.personalData.photos.small)
+
     const viewed = messageData.viewed
     return (
         <MessageContainer key={messageData.id}>
             {!viewed && <Indicator/>}
-            <FontAwesomeIcon icon={["fas", "trash"]}
+            <FontAwesomeIcon icon={faTrash}
                              className={styles.icon}
                              onClick={() => deleteMessage(messageData.id)}
             />

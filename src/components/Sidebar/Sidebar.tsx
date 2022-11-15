@@ -4,7 +4,7 @@ import {NavLinkComponent} from "./NavLinkComponent";
 import styled from "styled-components";
 import {device} from "../../common/mediaqueries/media";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks/reduxHooks";
-import {setMobileLayout} from "../../redux/appReducer/app-reducer";
+import {toggleSidebar} from "../../redux/appReducer/app-reducer";
 
 
 const StyledSidebar = styled.div<any>`
@@ -24,7 +24,7 @@ export const Sidebar = () => {
     const dispatch = useAppDispatch()
 
     const hideSidebar = () => {
-        dispatch(setMobileLayout())
+        dispatch(toggleSidebar())
     }
 
     return (

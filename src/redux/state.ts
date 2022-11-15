@@ -1,4 +1,3 @@
-import {StateType} from "../types /types";
 // import img from "../assets/images.jpeg";
 // import img2 from "../assets/rick.jpeg";
 // import img3 from "../assets/monkey.jpeg";
@@ -9,7 +8,7 @@ import {StateType} from "../types /types";
 //     deletePostAC,
 //     setProfileDataAC,
 //     updatePostTextAC
-// } from "./profileReducer/profile-reducer";
+// } from "./profileReducer/guest-reducer";
 // import sidebarReducer from "./sidebar-reducer";
 //
 //
@@ -30,7 +29,7 @@ import {StateType} from "../types /types";
 //             ],
 //             messageText: "",
 //         },
-//         profile: {
+//         guest: {
 //             postsData: [
 //                 {id: v1(), postText: "Hello world!", likes: 237, img: img},
 //                 {id: v1(), postText: "Bla Bla Bla", likes: 158, img: img2},
@@ -69,7 +68,7 @@ import {StateType} from "../types /types";
 //
 //     dispatch(action: ActionsType) {
 //         dialogsReducer(this._state.dialogs, action)
-//         profileReducer(this._state.profile, action)
+//         profileReducer(this._state.guest, action)
 //         sidebarReducer(this._state.sidebar, action)
 //
 //         this._callSubscriber(this._state)

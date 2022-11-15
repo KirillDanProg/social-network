@@ -2,6 +2,7 @@ import React, {ChangeEvent} from 'react';
 import styled from "styled-components";
 import styles from "../../components/Profile/Profile.module.css";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowUpFromBracket} from "@fortawesome/free-solid-svg-icons/faArrowUpFromBracket";
 
 const StyledAvatar = styled.img<any>`
   width: ${props => props.width || "60px"};
@@ -31,7 +32,8 @@ export const Avatar = (props) => {
                 <span className={styles.editIcon}>
                     <label htmlFor={"upload-photo"} style={{cursor: "pointer"}}>
                         <FontAwesomeIcon size={"lg"}
-                                         icon={["fas", "arrow-up-from-bracket"]}/>
+                                         icon={faArrowUpFromBracket}/>
+
                     </label>
 
                 </span>

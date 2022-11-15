@@ -21,7 +21,8 @@ export const Header: FC<HeaderPropsTypeInner> = (props) => {
             <Logo/>
             <Burger/>
             {
-                props.authData.login ? props.authData.login && <LogoutContainer/> :  <NavLink to={"login"}>Login</NavLink>
+                props.authData.login ? props.authData.login && <LogoutContainer/> :
+                    <NavLink to={"login"}>Login</NavLink>
             }
             <ThemeSwitch/>
         </StyledHeaderContainer>
@@ -30,9 +31,9 @@ export const Header: FC<HeaderPropsTypeInner> = (props) => {
 
 const StyledLogo = styled.span`
   display: none;
-@media ${device.tablet} {
-  display: block;
-}
+  @media ${device.tablet} {
+    display: block;
+  }
 `
 const Logo = () => {
     return (
