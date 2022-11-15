@@ -1,5 +1,4 @@
 import {authMeTC} from "../authReducer/authReducer";
-import {getProfileDataTC} from "../profileReducer/profile-reducer";
 import {AppThunk} from "../store";
 import {AxiosError} from "axios";
 import {RequestStatusType} from "../../api/api-types";
@@ -37,7 +36,7 @@ export const appReducer = (state: InitStateType = initialState, action: AppActio
             return {
                 ...state, theme: action.themeValue
             }
-        case "SET-MOBILE-LAYOUT":
+        case "TOGGLE-SIDEBAR":
             return {
                 ...state, mobile: !state.mobile
             }
@@ -50,7 +49,7 @@ export type AppActionType = ReturnType<typeof setAppInitializing>
     | ReturnType<typeof setAppStatus>
     | ReturnType<typeof setAppError>
     | ReturnType<typeof setAppTheme>
-    | ReturnType<typeof setMobileLayout>
+    | ReturnType<typeof toggleSidebar>
 
 
 export const setAppInitializing = (initStatus: boolean) => {
@@ -80,13 +79,13 @@ export const setAppTheme = (themeValue: ThemeAppType) => {
         themeValue
     } as const
 }
-export const setMobileLayout = () => {
+export const toggleSidebar = () => {
     return {
-        type: "SET-MOBILE-LAYOUT",
+        type: "TOGGLE-SIDEBAR",
     } as const
 }
 
-export const appInit = (): AppThunk => (dispatch, getState) => {
+export const appInit = (): AppThunk => (dispatch) => {
 
     // there is no friends api/endpoint then I set an empty arr to save
     // them to localStorage on follow request
@@ -98,11 +97,7 @@ export const appInit = (): AppThunk => (dispatch, getState) => {
 
     dispatch(authMeTC())
         .then(() => {
-            const userID = getState().auth.id
-            dispatch(getProfileDataTC(userID as number))
-                .then(() => {
-                    dispatch(setAppInitializing(true))
-                })
+            dispatch(setAppInitializing(true))
         })
     dispatch(fetchDialogsTC())
         .catch((e: AxiosError) => {
