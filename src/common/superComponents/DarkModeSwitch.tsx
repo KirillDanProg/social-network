@@ -2,6 +2,8 @@ import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks/reduxHooks";
 import {setAppThemeTC} from "../../redux/appReducer/app-reducer";
+import {faSun} from "@fortawesome/free-solid-svg-icons/faSun";
+import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
 
 
 export const ThemeSwitch = () => {
@@ -16,10 +18,10 @@ export const ThemeSwitch = () => {
             {
                 theme === "light" ?
                     <div>
-                        <FontAwesomeIcon color={"#143068"} size={"2x"} icon={["fas", "moon"]}/>
+                        <FontAwesomeIcon color={"#143068"} size={"2x"} icon={faMoon}/>
                     </div>
                     :
-                    <FontAwesomeIcon color={"#fff900"} size={"2x"} icon={["fas", "sun"]}/>
+                    <FontAwesomeIcon color={"#fff900"} size={"2x"} icon={faSun}/>
             }
         </div>
     );

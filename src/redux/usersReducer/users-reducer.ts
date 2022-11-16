@@ -1,13 +1,14 @@
 import {ThunkDispatch} from "redux-thunk";
 import {AppThunk, RootState} from "../store";
 import {AnyAction} from "redux";
-import {userAPI} from "../../api/api";
 import {ProfileDataType} from "../../types /ProfileType/ProfileTypes";
 import {
     addFriendToLocalStorage,
     getFriendsFromLocalStorage,
     removeFriendFromLocalStorage
 } from "../../utils/localStorage/usersLS";
+import {userAPI} from "../../api/users-api";
+import {removeDialogAC} from "../dialogsReducer/dialogs-reducer";
 
 export type UserType = {
     "name": string
@@ -175,17 +176,21 @@ export const unfollowTC = (id: number) => {
                 addRemoveFriendTC("remove", id)
                 dispatch(getFriendsTC())
                 dispatch(setDisableAC(null))
+
+                // remove from dialogs
+                // fake delete request
+                dispatch(removeDialogAC(id))
             }
         })
     }
 }
 export const getFriendsTC = (): AppThunk => async (dispatch) => {
-    const friendsArr = [] as ProfileDataType[]
     const friendsId = getFriendsFromLocalStorage()
+    const friendsArr = [] as ProfileDataType[]
     if (friendsId) {
-        await Promise.allSettled(friendsId.map(async (id) => {
-            const friendData = await userAPI.getProfileData(id)
-            friendsArr.push(friendData)
+         await Promise.allSettled(friendsId.map(async (id) => {
+           const friendItem =  await userAPI.getProfileData(id)
+            friendsArr.push(friendItem)
         }))
         dispatch(saveToFriends(friendsArr))
     }
@@ -197,4 +202,14 @@ export const addRemoveFriendTC = (action: string, id: number) => {
     if (action === "remove") {
         removeFriendFromLocalStorage(id)
     }
+}
+
+export const findUserTC = (term: string): AppThunk => async dispatch => {
+    try {
+        const res = await userAPI.findUser(term)
+        dispatch(setUsersAC(res.data.items))
+    } catch (e) {
+        console.log(e)
+    }
+
 }

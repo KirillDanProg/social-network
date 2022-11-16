@@ -1,6 +1,7 @@
 import {MessageDataType, MessageType, SandedMessageType} from "../../types /DialogsType/DialogsTypes";
 import {AppThunk} from "../store";
 import {dialogsAPI} from "../../api/dialogs-api";
+import {filterUsers} from "../../utils/helpers";
 
 export type DialogType = {
     id: number
@@ -45,6 +46,10 @@ export const dialogsReducer = (state: InitialStateType = initialState, action: D
                         .filter(m => m.id !== action.messageId)
                 }
             }
+        case REMOVE_DIALOG:
+            return {
+                ...state, dialogsData: state.dialogsData.filter(dialog => dialog.id !== action.userId)
+            }
         default:
             return state
     }
@@ -54,11 +59,13 @@ const FETCH_DIALOGS = "FETCH-DIALOGS/social-network"
 const SET_MESSAGES = "SET-MESSAGES/social-network"
 const ADD_MESSAGE = "ADD-MESSAGE/social-network"
 const DELETE_MESSAGE = "DELETE-MESSAGE/social-network"
+const REMOVE_DIALOG = "REMOVE-DIALOG/social-network"
 
 export type DialogsActionTypes = ReturnType<typeof fetchDialogsAC>
     | ReturnType<typeof setUserMessagesAC>
     | ReturnType<typeof addUserMessageAC>
     | ReturnType<typeof deleteUserMessageAC>
+    | ReturnType<typeof removeDialogAC>
 
 export const fetchDialogsAC = (dialogs: DialogType[]) => {
     return {
@@ -88,13 +95,22 @@ export const deleteUserMessageAC = (userId: number, messageId: string) => {
         messageId
     } as const
 }
-
+export const removeDialogAC = (userId: number) => {
+    return {
+        type: REMOVE_DIALOG,
+        userId
+    } as const
+}
 //thunk creators
 export const fetchDialogsTC = (): AppThunk => async dispatch => {
     try {
         // fetching dialogs
         const res = await dialogsAPI.fetchDialogs()
-        dispatch(fetchDialogsAC(res.data))
+        const friends: any = localStorage.getItem("friends")
+
+        const filteredDialogs = filterUsers(res.data, JSON.parse(friends))
+
+        dispatch(fetchDialogsAC(filteredDialogs))
     } catch (e) {
         console.log(e)
     }
@@ -121,6 +137,17 @@ export const deleteUserMessageTC = (userId: number, messageId: string): AppThunk
         if (res.data.resultCode === 0) {
             dispatch(deleteUserMessageAC(userId, messageId))
         }
+    } catch (e) {
+        console.log(e)
+    }
+}
+export const refreshDialogTC = (userId: number): AppThunk => async dispatch => {
+    try {
+        const res = await dialogsAPI.refreshDialog(userId)
+        if (res.data.resultCode === 0) {
+            dispatch(fetchDialogsTC())
+        }
+
     } catch (e) {
         console.log(e)
     }

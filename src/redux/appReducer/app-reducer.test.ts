@@ -6,7 +6,8 @@ beforeEach(() => {
         isInit: true,
         error: null,
         status: "idle",
-        theme: "light" as "dark" | 'light'
+        theme: "light" as "dark" | 'light',
+        mobile: false
     }
 })
 

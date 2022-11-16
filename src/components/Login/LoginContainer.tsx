@@ -11,7 +11,7 @@ import {PositionedComponent} from "../../common/superComponents/PositionComponen
 
 type LoginContainerType = MSTPType & MDTPType
 
-class LoginContainer extends React.Component<LoginContainerType> {
+class LoginContainer extends React.PureComponent<LoginContainerType> {
 
     render() {
         return (
