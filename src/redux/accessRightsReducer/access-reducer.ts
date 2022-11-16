@@ -2,6 +2,7 @@ import {ProfileDataType} from "../../types /ProfileType/ProfileTypes";
 import {AppThunk} from "../store";
 import {userAPI} from "../../api/users-api";
 import {getUserStatusTC} from "../profileReducer/profile-reducer";
+import {setAppInitializing} from "../appReducer/app-reducer";
 
 export type InitAccessStateType = typeof initialState
 export type accessStatusType = "admin" | "guest"
@@ -47,5 +48,6 @@ export const setAdminAccessRights = (id: number): AppThunk => async dispatch => 
         const status = await dispatch(getUserStatusTC(res.userId))
         dispatch(setPersonalData({...res, status}))
         dispatch(setAdminStatus())
+        dispatch(setAppInitializing(true))
     }
 }

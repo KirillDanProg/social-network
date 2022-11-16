@@ -3,6 +3,7 @@ import {LoginDataType} from "../../components/Login/Login";
 import {ResultCode} from "../../api/api-types";
 import {AppThunk} from "../store";
 import {setAdminAccessRights} from "../accessRightsReducer/access-reducer";
+import {setAppInitializing} from "../appReducer/app-reducer";
 
 export type initialAuthStateType = {
     id: number | null
@@ -46,16 +47,26 @@ export const authMe = (id: number | null, login: string | null, email: string | 
 
 
 export const authMeTC = (): AppThunk => async dispatch => {
-    const res = await authAPI.me()
-    const data = res.data.data
-    dispatch(authMe(data.id, data.login, data.email))
-    await dispatch(setAdminAccessRights(data.id))
+    try {
+        const res = await authAPI.me()
+        if (res.data.messages.length === 0) {
+            const data = res.data.data
+            dispatch(authMe(data.id, data.login, data.email))
+            await dispatch(setAdminAccessRights(data.id))
+        } else {
+            return
+        }
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 export const loginTC = (data: LoginDataType): AppThunk => dispatch => {
+    dispatch(setAppInitializing(false))
     authAPI.login(data).then(res => {
         if (res.data.resultCode === ResultCode.Ok) {
-            authAPI.me().then(response => response.data.data)
+            authAPI.me()
+                .then(response => response.data.data)
                 .then(data => {
                     dispatch(authMe(data.id, data.login, data.email))
                 })

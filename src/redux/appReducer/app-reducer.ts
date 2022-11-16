@@ -1,6 +1,5 @@
 import {authMeTC} from "../authReducer/authReducer";
 import {AppThunk} from "../store";
-import {AxiosError} from "axios";
 import {RequestStatusType} from "../../api/api-types";
 import {serverErrorsHandlers} from "../../utils/error-utils";
 import {fetchDialogsTC} from "../dialogsReducer/dialogs-reducer";
@@ -85,7 +84,7 @@ export const toggleSidebar = () => {
     } as const
 }
 
-export const appInit = (): AppThunk => (dispatch) => {
+export const appInit = (): AppThunk => async dispatch => {
 
     // there is no friends api/endpoint then I set an empty arr to save
     // them to localStorage on follow request
@@ -95,15 +94,10 @@ export const appInit = (): AppThunk => (dispatch) => {
     // get theme from localStorage
     dispatch(getAppThemeTC())
 
-    dispatch(authMeTC())
-        .then(() => {
-            dispatch(setAppInitializing(true))
-        })
-    dispatch(fetchDialogsTC())
-        .catch((e: AxiosError) => {
-            serverErrorsHandlers(dispatch, e.message)
-        })
+    await dispatch(authMeTC())
+    await dispatch(fetchDialogsTC())
 
+    dispatch(setAppInitializing(true))
 }
 
 export const setAppThemeTC = (themeValue: ThemeAppType): AppThunk => dispatch => {
