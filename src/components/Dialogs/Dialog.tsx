@@ -31,7 +31,7 @@ export const Dialog: FC<DialogPropsType> = memo((props) => {
 
     const messagesIndex = String(props.dialogData.id)
     let lastMessage
-    if (messages[messagesIndex].length > 0) {
+    if (messages[messagesIndex]) {
         lastMessage = messages[messagesIndex][messages[messagesIndex].length - 1]
     }
 

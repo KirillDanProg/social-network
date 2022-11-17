@@ -94,7 +94,6 @@ export const changeUserStatusTC = (status: string): AppThunk => dispatch => {
     profileAPI.updateUserStatus(status)
         .then(res => {
             if (res.resultCode === ResultCode.Ok) {
-                debugger
                 dispatch(updateUserStatusAC(status))
             }
         })
