@@ -5,34 +5,66 @@ import {Avatar} from "../../common/superComponents/Avatar";
 import styles from "./Dialogs.module.css"
 import {faCircleXmark} from "@fortawesome/free-solid-svg-icons/faCircleXmark";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useAppDispatch} from "../../utils/hooks/reduxHooks";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks/reduxHooks";
 import {unfollowTC} from "../../redux/usersReducer/users-reducer";
+import styled from "styled-components";
 
 type DialogPropsType = {
     dialogData: DialogType
-    changeId: (id: number) => void
-    setSenderData: (data: any) => void
+    goToDialogWindow: (chatData: any) => void
 }
+
+const StyledDialog = styled.div`
+  .userName {
+    font-size: 18px;
+  }
+
+  .messageText {
+    color: ${props => props.theme.subTextColor}
+  }
+`
 export const Dialog: FC<DialogPropsType> = memo((props) => {
     const {dialogData} = props
     const avatar = dialogData.photos.small || defaultAvatar
     const dispatch = useAppDispatch()
+    const messages = useAppSelector(state => state.dialogs.messagesData)
 
-    const changeIdHandler = () => {
-        props.setSenderData(dialogData)
-        props.changeId(dialogData.id)
+    const messagesIndex = String(props.dialogData.id)
+    let lastMessage
+    if (messages[messagesIndex].length > 0) {
+        lastMessage = messages[messagesIndex][messages[messagesIndex].length - 1]
+    }
+
+    const goToDialogWindowHandler = () => {
+        const chatData = {
+            avatar,
+            userName: dialogData.userName,
+            id: dialogData.id,
+            lastUserActivity: dialogData.lastUserActivityDate
+        }
+        props.goToDialogWindow(chatData)
     }
     const removeDialogHandler = () => {
         dispatch(unfollowTC(props.dialogData.id))
-
     }
 
     return (
-        <div className={styles.dialogBox} onClick={changeIdHandler}>
-            <Avatar src={avatar} width={"50px"}/>
-            <div>{dialogData.userName}</div>
-            <FontAwesomeIcon onClick={removeDialogHandler} className={styles.removeIcon} icon={faCircleXmark} />
-        </div>
+        <StyledDialog className={styles.dialogBox} onClick={goToDialogWindowHandler}>
+
+            <FontAwesomeIcon onClick={removeDialogHandler} className={styles.removeIcon}
+                             icon={faCircleXmark}/>
+
+            <div className={styles.userPreview}>
+                <Avatar src={avatar} width={"50px"}/>
+            </div>
+
+            <div className={styles.messageContainer}>
+                <span className={"userName"}>{dialogData.userName}</span>
+                <div className={"messageText"}>
+                    {lastMessage && lastMessage.body}
+                </div>
+            </div>
+        </StyledDialog>
     );
 });
 
