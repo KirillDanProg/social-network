@@ -10,7 +10,7 @@ import {useAppDispatch, useAppSelector} from "./common/hooks";
 import Loader from "./common/Loader/Loader";
 import {appInit} from "./redux/appReducer/app-reducer";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import {ThemeProvider} from "styled-components";
+import  {ThemeProvider} from "styled-components";
 import {themes} from "./theme/themes";
 import {StyledAppContainer} from "./common/superComponents/StyledApp";
 import {StyledMainContainer} from "./common/superComponents/StyledMain";

@@ -7,7 +7,7 @@ const StyledTextField = styled.input<any>`
   padding: ${props => props.padding || "8px 20px"};
   border: ${props => props.border || "none"};
   border-radius: ${props => props.borderRadius || "5px"};
-  margin-bottom: 6px;
+  margin-bottom: ${props => props.margin || "0"};
   font-size: 20px;
   display: inline-block;
   &:focus {

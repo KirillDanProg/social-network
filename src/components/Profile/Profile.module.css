@@ -3,14 +3,6 @@
     width: 150px;
     border-radius: 50%;
 }
-.profileInfo {
-    position: relative;
-    max-width: 240px;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 40px;
-    padding: 20px;
-}
 
 .name {
     text-align: center;
