@@ -6,7 +6,8 @@ export const themes = {
         primary: "#222222",
         secondary: "#222222",
         subBackground: "rgba(255, 255, 255, 0.3)",
-        other: "rgba(255, 255, 255, 0.4)"
+        other: "rgba(255, 255, 255, 0.4)",
+        subTextColor: "rgb(255 255 255 / 57%)"
 
     },
     "light":  {
@@ -15,7 +16,8 @@ export const themes = {
         primary: "#0a7ea4",
         secondary: "#eaecee",
         subBackground: "rgba(0, 0, 0, 0.1)",
-        other: "rgba(0, 0, 0, 0.5)"
+        other: "rgba(0, 0, 0, 0.5)",
+        subTextColor: "#636363b5"
     }
 }
 

@@ -36,12 +36,14 @@ export const dialogsReducer = (state: InitialStateType = initialState, action: D
         case ADD_MESSAGE:
             return {
                 ...state, messagesData: {
+                    ...state.messagesData,
                     [String(action.id)]: [...state.messagesData[String(action.id)], {...action.messageData}]
                 }
             }
         case DELETE_MESSAGE:
             return {
                 ...state, messagesData: {
+                    ...state.messagesData,
                     [String(action.userId)]: state.messagesData[action.userId]
                         .filter(m => m.id !== action.messageId)
                 }
@@ -109,6 +111,10 @@ export const fetchDialogsTC = (): AppThunk => async dispatch => {
         const friends: any = localStorage.getItem("friends")
 
         const filteredDialogs = filterUsers(res.data, JSON.parse(friends))
+
+        await Promise.allSettled(filteredDialogs.map(dialog => {
+            dispatch(fetchMessagesTC(dialog.id))
+        }))
 
         dispatch(fetchDialogsAC(filteredDialogs))
     } catch (e) {
