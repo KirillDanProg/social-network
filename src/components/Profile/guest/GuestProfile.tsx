@@ -3,7 +3,7 @@ import styles from "../Profile.module.css"
 import EditableSpan from "../../../common/superComponents/EditableSpan";
 import {Avatar} from "../../../common/superComponents/Avatar";
 import defaultUserImg from "../../../assets/user.png"
-import {getProfileDataTC, updateUserPhotoTC} from "../../../redux/profileReducer/profile-reducer";
+import {getProfileDataTC} from "../../../redux/profileReducer/profile-reducer";
 import {useAppDispatch, useAppSelector} from "../../../utils/hooks/reduxHooks";
 import {ProfileDescription} from "./ProfileDescription";
 import {Button} from "../../../common/superComponents/Button";
@@ -14,6 +14,7 @@ import {useNavigate} from "react-router-dom";
 import {refreshDialogTC} from "../../../redux/dialogsReducer/dialogs-reducer";
 import {faUserGroup} from "@fortawesome/free-solid-svg-icons/faUserGroup";
 import {followTC} from "../../../redux/usersReducer/users-reducer";
+import {StyledProfileInfoContainer} from "../admin/AdminProfile";
 
 
 type ProfileInfoType = {
@@ -24,16 +25,10 @@ export const GuestProfile: FC<ProfileInfoType> = (props) => {
     const navigate = useNavigate()
 
     let profileData = useAppSelector(state => state.profile.profileData)
-
     const userPhoto = (profileData.photos && profileData.photos.large) || defaultUserImg
-
     const goToDialogsHandler = () => {
         navigate("/dialogs")
         dispatch(refreshDialogTC(profileData.userId))
-    }
-
-    const uploadPhotoHandler = (file: File) => {
-        dispatch(updateUserPhotoTC(file))
     }
 
     const addToFriends = () => {
@@ -44,19 +39,18 @@ export const GuestProfile: FC<ProfileInfoType> = (props) => {
     }, [])
 
     return (
-        <div className={styles.profileInfo}>
+        <StyledProfileInfoContainer>
             <Flex direction={"column"} gap={"10px"}>
 
                 <Avatar width={"200px"}
                         profile={"true"}
                         shape={"square"}
                         src={userPhoto}
-                        uploadPhoto={uploadPhotoHandler}
                 />
 
                 <div className={styles.name}>{profileData.fullName}</div>
                 <Button onClick={addToFriends}>
-                    Add to friends
+                    Follow
                     <FontAwesomeIcon icon={faUserGroup}/>
                 </Button>
 
@@ -73,7 +67,7 @@ export const GuestProfile: FC<ProfileInfoType> = (props) => {
 
                 <ProfileDescription/>
             </>
-        </div>
+        </StyledProfileInfoContainer>
     )
 }
 
