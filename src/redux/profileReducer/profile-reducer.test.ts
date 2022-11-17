@@ -1,6 +1,5 @@
 import {ProfileType} from "../../types /ProfileType/ProfileTypes";
 import {v1} from "uuid";
-import profileReducer, {addPostAC, deletePostAC} from "./profile-reducer";
 
 let initialState: ProfileType
 beforeEach(() => {
@@ -25,20 +24,9 @@ beforeEach(() => {
 
 test("post should be added", () => {
 
-const postText = "some text"
-    const newState = profileReducer(initialState, addPostAC(postText))
-
-    expect(newState.postsData.length).toBe(4)
-
 })
 
 test("post should be deleted", () => {
 
-    const id = initialState.postsData[0].id
-
-    const newState = profileReducer(initialState, deletePostAC(id))
-
-    expect(newState.postsData.length).toBe(2)
-    expect(newState.postsData[0].likes).toBe(158)
 })
 export {}

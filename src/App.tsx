@@ -31,12 +31,12 @@ const App = () => {
         } else {
             navigate("/profile")
         }
-    }, [isAuth])
+    }, [])
 
 
     useEffect(() => {
         dispatch(appInit())
-    }, [isAuth])
+    }, [])
 
     return !isAppInit ? <Loader/>
         :

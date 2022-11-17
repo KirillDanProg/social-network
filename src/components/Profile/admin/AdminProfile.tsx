@@ -4,13 +4,13 @@ import EditableSpan from "../../../common/superComponents/EditableSpan";
 import {WithAuthRedirect} from "../../../hoc/withAuthRedirect";
 import {Avatar} from "../../../common/superComponents/Avatar";
 import defaultUserImg from "../../../assets/user.png"
-import {changeUserStatusTC, updateUserPhotoTC} from "../../../redux/profileReducer/profile-reducer";
 import {useAppDispatch, useAppSelector} from "../../../utils/hooks/reduxHooks";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Flex} from "../../../common/superComponents/Flex";
 import {faArrowUpFromBracket} from "@fortawesome/free-solid-svg-icons/faArrowUpFromBracket";
 import styled from "styled-components";
 import {device} from "../../../common/mediaqueries/media";
+import {changeUserStatusTC, updateUserPhotoTC} from "../../../redux/accessRightsReducer/access-reducer";
 
 
 export const StyledProfileInfoContainer = styled.div`
@@ -26,23 +26,24 @@ export const StyledProfileInfoContainer = styled.div`
 `
 const AdminProfile = memo(() => {
     const dispatch = useAppDispatch()
-    const adminProfileData = useAppSelector(state => state.userAccess.personalData)
+
+    const fullName = useAppSelector(state => state.userAccess.personalData.fullName)
+    const photo = useAppSelector(state => state.userAccess.personalData.photos.large)
+    const status = useAppSelector(state => state.userAccess.personalData.status)
 
     const changeStatusHandler = (status: string) => {
         dispatch(changeUserStatusTC(status))
     }
 
-    const photo = adminProfileData.photos.large || defaultUserImg
 
     const updateUserPhoto = (e: ChangeEvent<HTMLInputElement>) => {
         e.target.files && dispatch(updateUserPhotoTC(e.target.files[0]))
     }
 
     return (
-        <StyledProfileInfoContainer >
+        <StyledProfileInfoContainer>
             <Flex direction={"column"} gap={"10px"}>
                 <div style={{position: "relative"}}>
-
                  <span className={styles.editIcon}>
                     <label htmlFor={"upload-photo"} style={{cursor: "pointer"}}>
                         <FontAwesomeIcon size={"lg"}
@@ -60,19 +61,14 @@ const AdminProfile = memo(() => {
                             shape={"square"}
                             src={photo}
                     />
-
-
                 </div>
-
-                <div className={styles.name}>{adminProfileData.fullName}</div>
-
+                <div className={styles.name}>{fullName}</div>
             </Flex>
             <>
                 <UserStatus
-                    value={adminProfileData.status}
+                    value={status}
                     callback={changeStatusHandler}
                 />
-
             </>
         </StyledProfileInfoContainer>
     )
