@@ -37,7 +37,7 @@ export const Dialogs = memo(() => {
         <div className={styles.dialogsContainer}>
             {
                 isDialogSelected ?
-                    <DialogWindow chatData={chatData}/>
+                    <DialogWindow chatData={chatData} goBackToDialogs={setIsDialogSelected}/>
                     :
                     <div className={styles.colDialogs}>
                         {mappedDialogs}
