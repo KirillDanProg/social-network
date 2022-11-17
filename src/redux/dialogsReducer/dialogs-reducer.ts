@@ -49,8 +49,10 @@ export const dialogsReducer = (state: InitialStateType = initialState, action: D
                 }
             }
         case REMOVE_DIALOG:
+            delete state.messagesData[action.userId]
             return {
-                ...state, dialogsData: state.dialogsData.filter(dialog => dialog.id !== action.userId)
+                ...state,
+                dialogsData: state.dialogsData.filter(dialog => dialog.id !== action.userId)
             }
         default:
             return state
@@ -151,6 +153,7 @@ export const refreshDialogTC = (userId: number): AppThunk => async dispatch => {
     try {
         const res = await dialogsAPI.refreshDialog(userId)
         if (res.data.resultCode === 0) {
+            debugger
             dispatch(fetchDialogsTC())
         }
 
