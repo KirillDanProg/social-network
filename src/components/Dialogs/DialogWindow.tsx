@@ -16,7 +16,7 @@ export type DialogWindowPropsType = {
 
 const StyledDialogWindow = styled.div`
   width: 100%;
-
+  position: relative;
   .dialogHeader {
     display: flex;
     gap: 10px;
