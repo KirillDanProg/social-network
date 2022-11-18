@@ -52,7 +52,13 @@ export const GuestProfile: FC<ProfileInfoType> = (props) => {
                         shape={"square"}
                         src={userPhoto}
                 />
+                <>
+                    <UserStatus
+                        value={profileData.status}
+                    />
 
+                    <ProfileDescription/>
+                </>
                 <div className={styles.name}>{profileData.fullName}</div>
                 <Button onClick={addToFriends}>
                     {followed === undefined ? "follow" : "unfollow"}
@@ -65,13 +71,7 @@ export const GuestProfile: FC<ProfileInfoType> = (props) => {
                 </Button>
 
             </Flex>
-            <>
-                <UserStatus
-                    value={profileData.status}
-                />
 
-                <ProfileDescription/>
-            </>
         </StyledProfileInfoContainer>
     )
 }

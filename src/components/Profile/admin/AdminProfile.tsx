@@ -18,10 +18,15 @@ export const StyledProfileInfoContainer = styled.div`
   max-width: 240px;
   display: flex;
   flex-direction: row;
-  margin-bottom: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: auto ;
   padding: 20px;
   @media ${device.mobileS} {
     padding: 5px;
+  }
+  @media ${device.tablet} {
+    justify-content: flex-start;
   }
 `
 const AdminProfile = memo(() => {
@@ -57,19 +62,17 @@ const AdminProfile = memo(() => {
                            onChange={updateUserPhoto}
                     />
                     <Avatar width={"200px"}
-                            profile={"true"}
+                        profile={"true"}
                             shape={"square"}
                             src={photo}
                     />
                 </div>
                 <div className={styles.name}>{fullName}</div>
             </Flex>
-            <>
                 <UserStatus
                     value={status}
                     callback={changeStatusHandler}
                 />
-            </>
         </StyledProfileInfoContainer>
     )
 })
