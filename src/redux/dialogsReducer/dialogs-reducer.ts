@@ -49,8 +49,10 @@ export const dialogsReducer = (state: InitialStateType = initialState, action: D
                 }
             }
         case REMOVE_DIALOG:
+            delete state.messagesData[action.userId]
             return {
-                ...state, dialogsData: state.dialogsData.filter(dialog => dialog.id !== action.userId)
+                ...state,
+                dialogsData: state.dialogsData.filter(dialog => dialog.id !== action.userId)
             }
         default:
             return state

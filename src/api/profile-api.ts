@@ -28,7 +28,10 @@ export const profileAPI = {
     },
     updateUserPhoto: (file: File) => {
 
-        return instance.put(`profile/photo`, {image: file}, {
+        const formData = new FormData()
+        formData.append("image", file)
+
+        return instance.put(`profile/photo`, formData, {
             headers: {
                 "Content-Type": "multipart/form-data"
             }

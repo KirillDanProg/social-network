@@ -31,11 +31,12 @@ export const Dialog: FC<DialogPropsType> = memo((props) => {
 
     const messagesIndex = String(props.dialogData.id)
     let lastMessage
-    if (messages[messagesIndex].length > 0) {
+    if (messages[messagesIndex]) {
         lastMessage = messages[messagesIndex][messages[messagesIndex].length - 1]
     }
 
-    const goToDialogWindowHandler = () => {
+    const goToDialogWindowHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.stopPropagation()
         const chatData = {
             avatar,
             userName: dialogData.userName,
@@ -44,15 +45,21 @@ export const Dialog: FC<DialogPropsType> = memo((props) => {
         }
         props.goToDialogWindow(chatData)
     }
-    const removeDialogHandler = () => {
+    const removeDialogHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.stopPropagation()
         dispatch(unfollowTC(props.dialogData.id))
     }
 
     return (
         <StyledDialog className={styles.dialogBox} onClick={goToDialogWindowHandler}>
 
-            <FontAwesomeIcon onClick={removeDialogHandler} className={styles.removeIcon}
-                             icon={faCircleXmark}/>
+            <div onClick={removeDialogHandler}
+                 className={styles.removeIcon}
+            >
+                <FontAwesomeIcon
+                    icon={faCircleXmark}/>
+            </div>
+
 
             <div className={styles.userPreview}>
                 <Avatar src={avatar} width={"50px"}/>

@@ -6,9 +6,12 @@ import {FC} from "react";
 import {addUserMessageTC, deleteUserMessageTC} from "../../redux/dialogsReducer/dialogs-reducer";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks/reduxHooks";
 import {ChatDataType} from "./Dialogs";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowLeft} from "@fortawesome/free-solid-svg-icons/faArrowLeft";
 
 export type DialogWindowPropsType = {
     chatData: ChatDataType
+    goBackToDialogs: (value: boolean) => void
 }
 
 const StyledDialogWindow = styled.div`
@@ -33,7 +36,7 @@ const StyledDialogWindow = styled.div`
     }
   }
 `
-export const DialogWindow: FC<DialogWindowPropsType> = ({chatData}) => {
+export const DialogWindow: FC<DialogWindowPropsType> = ({chatData, goBackToDialogs}) => {
     const date = new Date(chatData.lastUserActivity)
     const dispatch = useAppDispatch()
     const messages = useAppSelector(state => state.dialogs.messagesData)
@@ -50,9 +53,13 @@ export const DialogWindow: FC<DialogWindowPropsType> = ({chatData}) => {
         dispatch(deleteUserMessageTC(chatData.id, id))
     }
 
+    const goToPreviousPage = () => {
+        goBackToDialogs(false)
+    }
     return (
         <StyledDialogWindow>
             <div className={"dialogHeader"}>
+                <FontAwesomeIcon icon={faArrowLeft} onClick={goToPreviousPage}/>
                 <Avatar src={chatData.avatar} width={"40px"}/>
                 <div className={"userInfo"}>
                     <span className={"userName"}>{chatData.userName}</span>
