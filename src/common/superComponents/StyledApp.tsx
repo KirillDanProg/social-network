@@ -23,6 +23,5 @@ const AppContainer = styled.div`
 
 export const StyledAppContainer = (props) => {
     return <AppContainer {...props}/>
-
 };
 

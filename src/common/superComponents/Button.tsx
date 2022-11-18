@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from "styled-components";
 
-const StyledButton = styled.button`
+const StyledButton = styled.button<any>`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
-  padding: 10px;
+  padding: ${props => props.padding || "5px 10px"};
   background-color:#12a76b;
   color: white;
   border: none;

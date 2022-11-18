@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React from 'react';
 import {SubmitHandler, useForm} from "react-hook-form";
 import {yupResolver} from '@hookform/resolvers/yup';
 import * as yup from "yup";
@@ -6,11 +6,10 @@ import styles from "./Login.module.css"
 import {Button} from "../../common/superComponents/Button";
 import {PositionedComponent} from "../../common/superComponents/PositionComponent";
 import {TextField} from "../../common/superComponents/TextField";
+import {useAppDispatch} from "../../utils/hooks/reduxHooks";
+import {loginTC} from "../../redux/authReducer/authReducer";
 
-type LoginPropsType = {
-    login: string | null
-    authorization: (data: LoginDataType) => void
-}
+
 export type LoginDataType = {
     email: string,
     password: string,
@@ -24,10 +23,12 @@ const schema = yup.object({
         .min(6, "Password is too short - should be 6 chars minimum"),
 }).required();
 
-export const Login: FC<LoginPropsType> = (props) => {
+export const Login= () => {
     const inputRef = React.createRef()
+    const dispatch = useAppDispatch()
+
     const onSubmit: SubmitHandler<LoginDataType> = data => {
-        props.authorization(data)
+        dispatch(loginTC(data))
     }
     const {register, handleSubmit, formState: {errors}} = useForm<LoginDataType>({
         resolver: yupResolver(schema)
@@ -46,7 +47,7 @@ export const Login: FC<LoginPropsType> = (props) => {
 
                     {errors.password || errors.email && <span>This field is required</span>}
 
-                    <Button type="submit">Login</Button>
+                    <Button padding={"10px 25px"} type="submit">Login</Button>
                 </form>
             }
         </PositionedComponent>)
