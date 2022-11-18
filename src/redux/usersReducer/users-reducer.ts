@@ -23,7 +23,7 @@ export type UserType = {
 }
 const initialState = {
     users: [] as UserType[],
-    friendsId: [] as number[],
+    friendsId: {} as { [key: string]: number },
     friends: [] as ProfileDataType[],
     error: "",
     total: 0,
@@ -39,9 +39,10 @@ const UNFOLLOW = "UNFOLLOW"
 const SET_PAGE = "SET-PAGE"
 const SET_TOTAL = "SET-TOTAL"
 const SET_DISABLE = "SET-DISABLE"
-const SAVE_FRIEND_ID = "SAVE-FRIEND-ID/social-network"
+const ADD_FRIEND_ID = "ADD-FRIEND-ID"
 const DELETE_FRIEND = "DELETE-FRIEND/social-network"
 const SAVE_TO_FRIENDS = "SAVE-TO-FRIENDS/social-network"
+const DELETE_FRIEND_ID = "DELETE-FRIEND-ID"
 
 export const usersReducer = (state: InitialUsersStateType = initialState, action: UsersActionsType): InitialUsersStateType => {
     switch (action.type) {
@@ -55,19 +56,24 @@ export const usersReducer = (state: InitialUsersStateType = initialState, action
             return {...state, page: action.page}
         case SET_TOTAL:
             return {...state, total: action.total}
+        case ADD_FRIEND_ID:
+            return {
+                ...state, friendsId: {...state.friendsId, [action.id]: action.id}
+            }
         case SET_DISABLE:
             return {...state, disabled: action.id}
-        case SAVE_FRIEND_ID:
-            return {
-                ...state, friendsId: [action.id, ...state.friendsId]
-            }
         case DELETE_FRIEND:
             return {
-                ...state, friendsId: state.friendsId.filter(friendId => friendId !== action.id)
+                ...state, friends: state.friends.filter(el => el.userId !== action.id)
             }
         case SAVE_TO_FRIENDS:
             return {
                 ...state, friends: action.friendsData.map(friend => ({...friend, followed: true}))
+            }
+        case DELETE_FRIEND_ID:
+            delete state.friendsId[action.id]
+            return {
+                ...state, friendsId: {...state.friendsId}
             }
         default:
             return state
@@ -80,10 +86,10 @@ export type UsersActionsType = ReturnType<typeof setUsersAC>
     | ReturnType<typeof setPageAC>
     | ReturnType<typeof setTotalAC>
     | ReturnType<typeof setDisableAC>
-    | ReturnType<typeof saveFriendId>
+    | ReturnType<typeof addFriendId>
     | ReturnType<typeof deleteFromFriends>
     | ReturnType<typeof saveToFriends>
-
+    | ReturnType<typeof deleteFriendId>
 export const setUsersAC = (users: UserType[]) => {
     return {
         type: SET_USERS,
@@ -126,12 +132,6 @@ export const setDisableAC = (id: number | null) => {
         id
     } as const
 }
-export const saveFriendId = (id: number) => {
-    return {
-        type: SAVE_FRIEND_ID,
-        id
-    } as const
-}
 export const deleteFromFriends = (id: number) => {
     return {
         type: DELETE_FRIEND,
@@ -144,7 +144,18 @@ export const saveToFriends = (friendsData: ProfileDataType[]) => {
         friendsData
     } as const
 }
-
+export const addFriendId = (id: number) => {
+    return {
+        type: ADD_FRIEND_ID,
+        id
+    } as const
+}
+export const deleteFriendId = (id: number) => {
+    return {
+        type: DELETE_FRIEND_ID,
+        id
+    } as const
+}
 // THUNK CREATORS
 export const getUsersTC = (page: number, count: number) => {
     return (dispatch: ThunkDispatch<RootState, void, AnyAction>) => {
@@ -161,8 +172,8 @@ export const followTC = (id: number) => {
         userAPI.follow(id).then(data => {
             if (data.resultCode === 0) {
                 dispatch(followAC(id))
-                addRemoveFriendTC("add", id)
-                dispatch(getFriendsTC())
+                addRemoveFriendTC("add", id, dispatch)
+                // dispatch(getFriendsTC())
                 dispatch(setDisableAC(null))
             }
         })
@@ -173,8 +184,8 @@ export const unfollowTC = (id: number) => {
         userAPI.unfollow(id).then(data => {
             if (data.resultCode === 0) {
                 dispatch(unfollowAC(id))
-                addRemoveFriendTC("remove", id)
-                dispatch(getFriendsTC())
+                addRemoveFriendTC("remove", id, dispatch)
+                dispatch(deleteFromFriends(id))
                 dispatch(setDisableAC(null))
 
                 // remove from dialogs
@@ -188,19 +199,21 @@ export const getFriendsTC = (): AppThunk => async (dispatch) => {
     const friendsId = getFriendsFromLocalStorage()
     const friendsArr = [] as ProfileDataType[]
     if (friendsId) {
-         await Promise.allSettled(friendsId.map(async (id) => {
-           const friendItem =  await userAPI.getProfileData(id)
+        await Promise.allSettled(friendsId.map(async (id) => {
+            const friendItem = await userAPI.getProfileData(id)
             friendsArr.push(friendItem)
         }))
         dispatch(saveToFriends(friendsArr))
     }
 }
-export const addRemoveFriendTC = (action: string, id: number) => {
+export const addRemoveFriendTC = (action: string, id: number, dispatch) => {
     if (action === "add") {
         addFriendToLocalStorage(id)
+        dispatch(addFriendId(id))
     }
     if (action === "remove") {
         removeFriendFromLocalStorage(id)
+        dispatch(deleteFriendId(id))
     }
 }
 
