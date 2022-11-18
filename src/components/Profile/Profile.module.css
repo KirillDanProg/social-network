@@ -15,4 +15,21 @@
     right: -20px;
     cursor: pointer;
 }
+.brandIcon {
 
+}
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.infoField {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+}
+.checkboxField {
+    display: flex;
+    justify-content: center;
+    gap: 30%;
+}

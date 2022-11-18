@@ -26,7 +26,6 @@
     "react-test-renderer": "17.0.2",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
-    "redux-form": "8.3.8",
     "redux-thunk": "^2.4.1",
     "reselect": "4.1.5",
     "styled-components": "^5.3.6",
@@ -68,7 +67,6 @@
     "@types/react-redux": "7.1.22",
     "@types/react-router-dom": "5.3.3",
     "@types/react-test-renderer": "17.0.1",
-    "@types/redux-form": "8.3.3",
     "@types/styled-components": "^5.1.26",
     "@types/uuid": "^8.3.4"
   }
