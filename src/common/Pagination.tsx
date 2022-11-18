@@ -21,12 +21,12 @@ export const Pagination: FC<PaginationPropsType> = (props) => {
 
     return (
             <ReactPaginate
-                breakLabel="..."
-                nextLabel="next >"
+                nextLabel=" >"
                 onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
+                pageRangeDisplayed={1}
+                marginPagesDisplayed={2}
                 pageCount={pageCount}
-                previousLabel="< previous"
+                previousLabel="< "
                 className={"pagination"}
                 activeClassName="active"
             />
