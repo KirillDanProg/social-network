@@ -5,7 +5,7 @@ import {device} from "../mediaqueries/media";
 const MainContainer = styled.div<any>`
   grid-area: 2 / 1 / 6 / 13;
   position: relative;
-  height: calc(100vh - 50px);
+  min-height: calc(100vh - 50px);
   margin: ${props => props.margin || "0 10px"};
   padding: ${props => props.padding || "10px"};
   background: ${props => props.theme.secondary};

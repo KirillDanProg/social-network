@@ -153,7 +153,6 @@ export const refreshDialogTC = (userId: number): AppThunk => async dispatch => {
     try {
         const res = await dialogsAPI.refreshDialog(userId)
         if (res.data.resultCode === 0) {
-            debugger
             dispatch(fetchDialogsTC())
         }
 

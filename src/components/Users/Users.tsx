@@ -6,12 +6,11 @@ import {Pagination} from "../../common/Pagination";
 import {Search} from "../../common/Search";
 
 export const Users = memo((props: UsersPropsType) => {
-
     const {getUsers, users, changePage} = props
 
     useEffect(() => {
         getUsers(users.page, users.count)
-    }, [users.page, users.count, users.total])
+    }, [users.page])
 
     return (
         <>

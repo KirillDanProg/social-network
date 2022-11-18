@@ -1,10 +1,11 @@
-import React, { memo, useState} from "react";
+import React, {memo, useEffect, useState} from "react";
 import styles from "./Dialogs.module.css"
-import { DialogType} from "../../redux/dialogsReducer/dialogs-reducer";
-import {useSelector} from "react-redux";
+import {DialogType, fetchDialogsTC} from "../../redux/dialogsReducer/dialogs-reducer";
+import { useSelector} from "react-redux";
 import {RootState} from "../../redux/store";
 import {Dialog} from "./Dialog";
 import {DialogWindow} from "./DialogWindow";
+import {useAppDispatch} from "../../utils/hooks/reduxHooks";
 
 export type ChatDataType = {
     avatar: any
@@ -18,7 +19,7 @@ export const Dialogs = memo(() => {
     const dialogItems = useSelector<RootState, DialogType[]>(state => state.dialogs.dialogsData)
     const [isDialogSelected, setIsDialogSelected] = useState(false)
     const [chatData, setChatData] = useState({} as ChatDataType)
-
+    const dispatch = useAppDispatch()
 
     const goToDialogWindow = (chatData: any) => {
         setIsDialogSelected(true)
@@ -31,7 +32,9 @@ export const Dialogs = memo(() => {
         )
     })
 
-
+    useEffect(() => {
+        dispatch(fetchDialogsTC())
+    }, [])
 
     return (
         <div className={styles.dialogsContainer}>
