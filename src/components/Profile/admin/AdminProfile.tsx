@@ -1,4 +1,4 @@
-import React, { memo, useState} from "react";
+import React, {memo, useState} from "react";
 import styles from "../Profile.module.css"
 import {WithAuthRedirect} from "../../../hoc/withAuthRedirect";
 import {Avatar} from "../../../common/superComponents/Avatar";
@@ -15,16 +15,15 @@ import defaultUserImg from "../../../assets/user.png";
 
 
 export const StyledProfileInfoContainer = styled.div`
-  max-width: 95%;
   position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
+  align-items: start;
+  justify-content: start;
   margin: auto;
   padding: 5px;
   @media ${device.tablet} {
-    max-width: 300px;
     margin: 0;
   }
 `
@@ -32,7 +31,7 @@ const AdminProfile = memo(() => {
     const dispatch = useAppDispatch()
 
     const fullName = useAppSelector(state => state.userAccess.personalData.fullName)
-    const photo = useAppSelector(state => state.userAccess.personalData.photos.large)  || defaultUserImg
+    const photo = useAppSelector(state => state.userAccess.personalData.photos.large) || defaultUserImg
     const status = useAppSelector(state => state.userAccess.personalData.status)
     const [editUserInfoMode, setEditMode] = useState(false)
 
@@ -58,16 +57,19 @@ const AdminProfile = memo(() => {
                   </span>
                 </div>
                 <div className={styles.name}>{fullName}</div>
+                <UserStatus
+                    value={status}
+                    callback={changeStatusHandler}
+                />
             </Flex>
-            <UserStatus
-                value={status}
-                callback={changeStatusHandler}
-            />
+
+
 
             <UserInfoContainer fullName={fullName}
                                editMode={editUserInfoMode}
                                setEditMode={editUserInfoHandler}
             />
+
 
         </StyledProfileInfoContainer>
     )
