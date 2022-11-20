@@ -13,7 +13,7 @@ export type ProfileDataTypeAPI = {
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
-    contacts?: {
+    contacts: {
         github: string
         vk: string
         facebook: string

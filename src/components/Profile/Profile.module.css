@@ -9,25 +9,17 @@
     font-size: 20px;
     font-weight: bold;
 }
-.editIcon{
-    position: absolute;
-    bottom: 10px;
-    right: -20px;
-    cursor: pointer;
-}
-.brandIcon {
 
+.editIcon {
+    margin: 10px;
 }
-.formContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
+
 .infoField {
     border: none;
     padding: 8px 16px;
     border-radius: 10px;
 }
+
 .checkboxField {
     display: flex;
     justify-content: center;

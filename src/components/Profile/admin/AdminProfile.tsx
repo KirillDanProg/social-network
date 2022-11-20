@@ -9,37 +9,37 @@ import styled from "styled-components";
 import {device} from "../../../common/mediaqueries/media";
 import {changeUserStatusTC} from "../../../redux/accessRightsReducer/access-reducer";
 import {faPenToSquare} from "@fortawesome/free-solid-svg-icons/faPenToSquare";
-import {UserStatus} from "./UserStatus";
-import {UserInfo} from "./UserInfo";
+import {UserStatus} from "../userInfo/UserStatus";
+import {UserInfoContainer} from "../userInfo/UserInfoContainer";
+import defaultUserImg from "../../../assets/user.png";
 
 
 export const StyledProfileInfoContainer = styled.div`
+  max-width: 95%;
   position: relative;
-  max-width: 240px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   margin: auto;
-  padding: 20px;
-  @media ${device.mobileS} {
-    padding: 5px;
-  }
+  padding: 5px;
   @media ${device.tablet} {
-    justify-content: flex-start;
+    max-width: 300px;
+    margin: 0;
   }
 `
 const AdminProfile = memo(() => {
     const dispatch = useAppDispatch()
 
     const fullName = useAppSelector(state => state.userAccess.personalData.fullName)
-    const photo = useAppSelector(state => state.userAccess.personalData.photos.large)
+    const photo = useAppSelector(state => state.userAccess.personalData.photos.large)  || defaultUserImg
     const status = useAppSelector(state => state.userAccess.personalData.status)
     const [editUserInfoMode, setEditMode] = useState(false)
 
     const changeStatusHandler = (status: string) => {
         dispatch(changeUserStatusTC(status))
     }
+
     const editUserInfoHandler = () => {
         setEditMode(!editUserInfoMode)
     }
@@ -64,7 +64,10 @@ const AdminProfile = memo(() => {
                 callback={changeStatusHandler}
             />
 
-            <UserInfo fullName={fullName} editMode={editUserInfoMode}/>
+            <UserInfoContainer fullName={fullName}
+                               editMode={editUserInfoMode}
+                               setEditMode={editUserInfoHandler}
+            />
 
         </StyledProfileInfoContainer>
     )

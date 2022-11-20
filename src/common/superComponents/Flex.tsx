@@ -7,8 +7,9 @@ type FlexPropsType = {
     align?: "center" | "end" | "start"
     margin?: string
     gap?: string
+    width?: string
 }
-const StyledFlex = styled.div`
+const StyledFlex = styled.div<any>`
   display: flex;
   flex-direction: ${(props: any) => props.direction || "row"};
   justify-content: ${(props: any) => props.justify || "center"};
@@ -16,6 +17,7 @@ const StyledFlex = styled.div`
   margin: ${(props: any) => props.margin || "0"};
   gap: ${(props: any) => props.gap || "0"};
   flex-wrap: wrap;
+  width: ${props => props.width}
 `
 
 export const Flex: FC<FlexPropsType> = (props) => {

@@ -117,6 +117,7 @@ export const changeUserStatusTC = (status: string): AppThunk => dispatch => {
         .catch(err => console.warn(err))
 }
 export type UserInfoModelType = {
+    aboutMe: string
     lookingForAJob: boolean
     lookingForAJobDescription: string
     fullName: string
@@ -136,7 +137,7 @@ type ContactsType = {
 export const updatePersonalData = (userInfoModel: UserInfoModelType): AppThunk => async dispatch => {
     const res = await profileAPI.updateUserInfo(userInfoModel)
     if (res.data.resultCode === 0) {
-        dispatch(updateUserInfo(res.data.data))
+        dispatch(updateUserInfo(userInfoModel))
     }
 
 }
