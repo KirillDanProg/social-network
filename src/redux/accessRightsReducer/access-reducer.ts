@@ -24,6 +24,14 @@ export const accessReducer = (state: InitAccessStateType = initialState, action:
             return {...state, personalData: {...state.personalData, photos: {...action.photos}}}
         case UPDATE_USER_STATUS:
             return {...state, personalData: {...state.personalData, status: action.payload.status}}
+        case UPDATE_USER_INFO:
+            return {
+                ...state, personalData: {
+                    ...state.personalData,
+                    ...action.userInfo,
+                    contacts: {...action.userInfo.contacts}
+                }
+            }
         default:
             return state
     }
@@ -33,13 +41,14 @@ const SET_PERSONAL_DATA = "SET-PERSONAL-DATA/social#network"
 const SET_ADMIN_STATUS = "SET-ADMIN-STATUS/social#network"
 const UPDATE_USER_PHOTO = "UPDATE-USER-PHOTO"
 const UPDATE_USER_STATUS = "UPDATE-USER-STATUS"
-
+const UPDATE_USER_INFO = "UPDATE-USER-INFO"
 
 
 export type AccessActionsType = ReturnType<typeof setPersonalData>
     | ReturnType<typeof setAdminStatus>
     | ReturnType<typeof updateUserPhotoAC>
     | ReturnType<typeof updateUserStatusAC>
+    | ReturnType<typeof updateUserInfo>
 
 export const setPersonalData = (data: ProfileDataType) => {
     return {
@@ -68,6 +77,13 @@ export const updateUserStatusAC = (status: string) => {
         }
     } as const
 }
+
+export const updateUserInfo = (userInfo: UserInfoModelType) => {
+    return {
+        type: UPDATE_USER_INFO,
+        userInfo
+    } as const
+}
 export const setAdminAccessRights = (id: number): AppThunk => async dispatch => {
     const res = await userAPI.getProfileData(id)
 
@@ -78,6 +94,7 @@ export const setAdminAccessRights = (id: number): AppThunk => async dispatch => 
         dispatch(setAppInitializing(true))
     }
 }
+
 
 export const updateUserPhotoTC = (photo: File): AppThunk => async dispatch => {
     try {
@@ -98,4 +115,29 @@ export const changeUserStatusTC = (status: string): AppThunk => dispatch => {
             }
         })
         .catch(err => console.warn(err))
+}
+export type UserInfoModelType = {
+    aboutMe: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+}
+type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+
+export const updatePersonalData = (userInfoModel: UserInfoModelType): AppThunk => async dispatch => {
+    const res = await profileAPI.updateUserInfo(userInfoModel)
+    if (res.data.resultCode === 0) {
+        dispatch(updateUserInfo(userInfoModel))
+    }
+
 }

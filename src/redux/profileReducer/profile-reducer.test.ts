@@ -17,7 +17,17 @@ beforeEach(() => {
             followed: false,
             lookingForAJob: true,
             lookingForAJobDescription: "string",
-            aboutMe: "some text"
+            aboutMe: "some text",
+            contacts: {
+                github: "",
+                instagram: "",
+                facebook: "",
+                mainLink: "",
+                twitter: "",
+                website: "",
+                youtube: "",
+                vk: ""
+            }
         },
     }
 })

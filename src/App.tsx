@@ -3,9 +3,7 @@ import './App.css';
 import { Route, Routes, useNavigate,} from "react-router-dom";
 import {Sidebar} from "./components/Sidebar/Sidebar";
 import {Friends} from "./components/Friends/Friends";
-import HeaderContainer from "./components/Header/HeaderContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import LoginContainer from "./components/Login/LoginContainer";
 import {useAppDispatch, useAppSelector} from "./common/hooks";
 import Loader from "./common/Loader/Loader";
 import {appInit} from "./redux/appReducer/app-reducer";
@@ -16,13 +14,14 @@ import {StyledAppContainer} from "./common/superComponents/StyledApp";
 import {StyledMainContainer} from "./common/superComponents/StyledMain";
 import ProfileInfoContainer from "./components/Profile/ProfileInfoContainer";
 import {ProfilePage} from "./components/Profile/ProfilePage";
+import {LoginContainer} from "./components/Login/LoginContainer";
+import {Header} from "./components/Header/Header";
 
 const App = () => {
     const isAppInit = useAppSelector(state => state.application.isInit)
     const theme = useAppSelector(state => state.application.theme)
-    const dispatch = useAppDispatch()
     const isAuth = useAppSelector(state => state.auth.login)
-
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -44,7 +43,7 @@ const App = () => {
             <ThemeProvider theme={themes[theme]}>
 
                 <StyledAppContainer className="App">
-                    <HeaderContainer/>
+                    <Header/>
                     <Sidebar/>
                     <StyledMainContainer className="AppContent">
                         <Routes>

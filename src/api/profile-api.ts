@@ -1,6 +1,7 @@
 import axios from "axios";
 import {ProfileDataType} from "../types /ProfileType/ProfileTypes";
 import {ResponseType} from "./api-types";
+import {UserInfoModelType} from "../redux/accessRightsReducer/access-reducer";
 
 const instance = axios.create({
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -36,5 +37,8 @@ export const profileAPI = {
                 "Content-Type": "multipart/form-data"
             }
         })
+    },
+    updateUserInfo: (userInfoModel: UserInfoModelType) => {
+        return instance.put(`/profile`, userInfoModel)
     }
 }

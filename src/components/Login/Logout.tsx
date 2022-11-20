@@ -1,36 +1,18 @@
 import React from 'react';
-import {connect} from "react-redux";
-import {ThunkDispatch} from "redux-thunk";
-import {RootState} from "../../redux/store";
-import {AnyAction} from "redux";
 import {logoutTC} from "../../redux/authReducer/authReducer";
+import {useAppDispatch} from "../../utils/hooks/reduxHooks";
+import {Button} from "../../common/superComponents/Button";
 
 
+export const Logout = () => {
 
-class LogoutContainer extends React.Component<ReturnType<typeof mapDispatchToProps>> {
+    const dispatch = useAppDispatch()
 
-    render () {
-        return (
-            <Logout logout={this.props.logout}/>
-        )
-    }
-}
-const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, void, AnyAction>) => {
-    return {
-        logout: () => {
-            dispatch(logoutTC())
-        }
-    }
-}
-
-
-export const Logout = (props: {logout: () => void}) => {
     const onClickHandler = () => {
-        props.logout()
+       dispatch(logoutTC())
     }
     return (
-        <button onClick={onClickHandler}>Logout</button>
+        <Button padding={"8px 20px"} onClick={onClickHandler}>Logout</Button>
     );
 };
 
-export default connect(null, mapDispatchToProps)(LogoutContainer)

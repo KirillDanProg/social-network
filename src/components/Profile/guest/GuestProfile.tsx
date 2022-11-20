@@ -16,7 +16,6 @@ import {faUserGroup} from "@fortawesome/free-solid-svg-icons/faUserGroup";
 import {followTC, unfollowTC} from "../../../redux/usersReducer/users-reducer";
 import {StyledProfileInfoContainer} from "../admin/AdminProfile";
 
-
 type ProfileInfoType = {
     idFromURL: number
 }
