@@ -17,6 +17,14 @@ const StyledMessageContainer = styled.div<any>`
     transition: 0.3s;
   }
 
+  ${props => props.recipientMessage && `
+    flex-direction: row;
+  &::after {
+    left: -20px;
+    background: radial-gradient(circle at 0 0, rgba(0, 0, 0, 0) 20px, ${props => props.theme.subBackground} 0);
+  }
+  `}
+
 `
 export const MessageContainer = (props) => {
     return (

@@ -17,6 +17,7 @@ export type DialogWindowPropsType = {
 const StyledDialogWindow = styled.div`
   width: 100%;
   position: relative;
+
   .dialogHeader {
     display: flex;
     gap: 10px;
@@ -68,7 +69,8 @@ export const DialogWindow: FC<DialogWindowPropsType> = ({chatData, goBackToDialo
             </div>
             <div>
                 {messages[String(chatData.id)].map(message => {
-                    return <Message key={message.id}
+                    return <Message recipientPhoto={chatData.avatar}
+                                    key={message.id}
                                     deleteMessage={deleteMessageHandler}
                                     messageData={message}/>
                 })}

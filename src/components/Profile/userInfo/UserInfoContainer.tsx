@@ -6,8 +6,6 @@ import {UserInfoEdit} from "./UserInfoEdit";
 import {UserInfo} from "./UserInfo";
 
 const StyledUserInfo = styled.div`
-  width: 100%;
-
   .userInfoContainer {
     display: flex;
     flex-direction: column;
