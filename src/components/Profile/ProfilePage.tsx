@@ -16,7 +16,6 @@ export const ProfilePage: FC<ProfilePagePropsType> = memo(({idFromURL}) => {
                     :
                     <AdminProfile/>
             }
-
         </div>
     )
 })

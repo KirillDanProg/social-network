@@ -30,7 +30,7 @@ const StyledMessage = styled.div<any>`
     
     &::after {
     left: -20px;
-      transform: rotate(0);
+    transform: rotate(0);
     background: radial-gradient(circle at 0 0, rgba(0, 0, 0, 0) 20px, ${props => props.theme.subBackground} 0);
   }
   `}

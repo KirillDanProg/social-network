@@ -20,6 +20,7 @@
     border-radius: 5%;
     background-color: rgba(5, 4, 6, 0.10);
 }
+
 .userPreview {
     display: flex;
     flex-direction: column;
@@ -32,9 +33,11 @@
     transition: 0.3s;
     background-color: rgba(5, 4, 6, 0.20);
 }
+
 .colDialogs {
     width: 100%;
 }
+
 .messageContainer {
     display: flex;
     flex-direction: column;
@@ -42,11 +45,11 @@
     text-align: start;
     font-size: 14px;
 }
+
 .userName {
     font-size: 20px;
     margin-bottom: 8px;
 }
-
 
 .removeIcon {
     position: absolute;
@@ -54,12 +57,15 @@
     right: 5px;
     padding: 5px;
 }
+
 .removeIcon path {
-   fill: gray;
+    fill: #c44444;
 }
+
 .icon {
     opacity: 0.6;
 }
+
 .icon:hover {
     color: rgba(255, 20, 0);
 }
