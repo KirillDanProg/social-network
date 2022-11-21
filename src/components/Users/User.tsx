@@ -29,7 +29,7 @@ export const User: FC<UserPropsType> = (props) => {
     return (
         <div className={styles.userBox}>
             <NavLink to={`/profile/${props.userId}`}>
-               <Avatar src={props.photos.small || userAvatar }/>
+               <Avatar width={"80px"} src={props.photos.small || userAvatar }/>
             </NavLink>
             <div>{props.fullName}</div>
             <div>{props.status}</div>
