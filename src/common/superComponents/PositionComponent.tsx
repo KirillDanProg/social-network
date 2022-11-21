@@ -13,12 +13,12 @@ const StyledPositionComponent = styled.div<ComposeComponentType>`
   width: ${props => props.width || "100%"};
   background-color: ${props => props.theme.secondary};
   ${props => props.center && `
-          position: fixed;
+          transform: translate(-50%, -50%);
+          position: absolute;
           top: 50%;
           bottom: 0;
           left: 50%;
           right: 0;
-          transform: translate(-50%, -50%)
     `}
   ${props => props.bottom && `
           position: ${props.position || "static"};
