@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import {device} from "../mediaqueries/media";
 
 
 type ComposeComponentType = {
@@ -9,7 +10,7 @@ type ComposeComponentType = {
     position: string
 }
 const StyledPositionComponent = styled.div<ComposeComponentType>`
-  width: ${props => props.width || "50%"};
+  width: ${props => props.width || "100%"};
   background-color: ${props => props.theme.secondary};
   ${props => props.center && `
           position: fixed;
@@ -23,6 +24,9 @@ const StyledPositionComponent = styled.div<ComposeComponentType>`
           position: ${props.position || "static"};
           bottom: 30px;
   `}
+  @media ${device.tablet} {
+    width: 50%
+  }
 
 `
 

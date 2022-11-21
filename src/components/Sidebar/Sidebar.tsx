@@ -8,13 +8,11 @@ import {toggleSidebar} from "../../redux/appReducer/app-reducer";
 
 
 const StyledSidebar = styled.div<any>`
-  ${props => props.mobile && `
- display: none;
- `}
+  ${props => props.mobile && `display: none;`}
   position: relative;
-  z-index: 2;
   background-color: ${props => props.theme.backgroundColor};
   transition: 0.5s;
+  z-index: 2;
   @media ${device.tablet} {
     display: block;
   }

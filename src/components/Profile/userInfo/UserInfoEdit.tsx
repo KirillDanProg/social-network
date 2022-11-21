@@ -21,10 +21,12 @@ export const UserInfoEdit: FC<UserInfoEditPropsType> = ({updatePhoto, userInfo, 
                     <FontAwesomeIcon size={"lg"} icon={faArrowUpFromBracket}/>
                 </label>
             </span>
+
             <UserInfoForm setEditMode={setEditMode}
                           userInfo={userInfo}/>
+
             <input type={"file"}
-                   accept={"image/png, image/gif, image/jpeg"}
+                   accept={"image/png, image/jpeg"}
                    id={"upload-photo"}
                    style={{display: "none"}}
                    onChange={updatePhoto}

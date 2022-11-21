@@ -18,14 +18,16 @@ const StyledUserInfo = styled.div`
       padding: 4px;
       border-bottom: 1px solid ${props => props.theme.color};
     }
+
     .media-icons {
       display: flex;
       align-items: center;
       gap: 10px;
-      
+
       .icon {
         width: 50px;
       }
+
       .github {
         background-color: white;
         border-radius: 50%;
@@ -33,7 +35,7 @@ const StyledUserInfo = styled.div`
       }
     }
   }
-  
+
 `
 type UserInfoType = {
     fullName: string
