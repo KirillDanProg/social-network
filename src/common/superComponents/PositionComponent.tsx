@@ -27,7 +27,6 @@ const StyledPositionComponent = styled.div<ComposeComponentType>`
   @media ${device.tablet} {
     width: 50%
   }
-
 `
 
 export const PositionedComponent = (props) => {
