@@ -1,7 +1,6 @@
 .sidebar {
     grid-area: 2 / 1 / 6 / 3;
     min-width: 200px;
-    min-height: 100vh;
     text-align: center;
 }
 
