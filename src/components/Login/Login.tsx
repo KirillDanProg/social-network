@@ -39,7 +39,7 @@ export const Login = () => {
     });
 
     return (
-        <PositionedComponent center className={styles.loginContainer}>
+        <PositionedComponent center >
             {
                 <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
                     <TextField innerRef={inputRef}
