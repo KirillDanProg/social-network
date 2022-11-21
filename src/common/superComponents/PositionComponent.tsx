@@ -6,12 +6,13 @@ type ComposeComponentType = {
     width: string
     center: string,
     bottom: string
+    position: string
 }
 const StyledPositionComponent = styled.div<ComposeComponentType>`
-  width: ${props => props.width || "100%"};
-
+  width: ${props => props.width || "50%"};
+  background-color: ${props => props.theme.secondary};
   ${props => props.center && `
-          position: absolute;
+          position: fixed;
           top: 50%;
           bottom: 0;
           left: 50%;
@@ -19,11 +20,8 @@ const StyledPositionComponent = styled.div<ComposeComponentType>`
           transform: translate(-50%, -50%)
     `}
   ${props => props.bottom && `
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          transform: translate(-50%, 0)
-          
+          position: ${props.position || "static"};
+          bottom: 30px;
   `}
 
 `

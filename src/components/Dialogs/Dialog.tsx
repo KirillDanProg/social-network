@@ -60,7 +60,6 @@ export const Dialog: FC<DialogPropsType> = memo((props) => {
                     icon={faCircleXmark}/>
             </div>
 
-
             <div className={styles.userPreview}>
                 <Avatar src={avatar} width={"50px"}/>
             </div>

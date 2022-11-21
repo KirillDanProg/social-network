@@ -6,7 +6,6 @@ import {device} from "../mediaqueries/media";
 const AppContainer = styled.div`
   display: grid;
   gap: 20px;
-  margin: 0 auto;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 50px 1fr;
   grid-column-gap: 5px;

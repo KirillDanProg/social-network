@@ -1,21 +1,21 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import { Route, Routes, useNavigate,} from "react-router-dom";
-import {Sidebar} from "./components/Sidebar/Sidebar";
+import {Route, Routes, useNavigate,} from "react-router-dom";
 import {Friends} from "./components/Friends/Friends";
-import UsersContainer from "./components/Users/UsersContainer";
 import {useAppDispatch, useAppSelector} from "./common/hooks";
 import Loader from "./common/Loader/Loader";
-import {appInit} from "./redux/appReducer/app-reducer";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import  {ThemeProvider} from "styled-components";
+import {ThemeProvider} from "styled-components";
 import {themes} from "./theme/themes";
 import {StyledAppContainer} from "./common/superComponents/StyledApp";
 import {StyledMainContainer} from "./common/superComponents/StyledMain";
-import ProfileInfoContainer from "./components/Profile/ProfileInfoContainer";
-import {ProfilePage} from "./components/Profile/ProfilePage";
 import {LoginContainer} from "./components/Login/LoginContainer";
 import {Header} from "./components/Header/Header";
+import {Sidebar} from "./components/Sidebar/Sidebar";
+import UsersContainer from "./components/Users/UsersContainer";
+import {ProfilePage} from "./components/Profile/ProfilePage";
+import {appInit} from "./redux/appReducer/app-reducer";
+import ProfileInfoContainer from "./components/Profile/ProfileInfoContainer";
 
 const App = () => {
     const isAppInit = useAppSelector(state => state.application.isInit)
@@ -48,7 +48,7 @@ const App = () => {
                     <StyledMainContainer className="AppContent">
                         <Routes>
                             <Route path="/profile" element={<ProfileInfoContainer/>}>
-                                <Route path={":userId"} element={<ProfilePage/> }/>
+                                <Route path={":userId"} element={<ProfilePage/>}/>
                             </Route>
                             <Route path="/dialogs" element={<Dialogs/>}/>
                             <Route path="/users" element={<UsersContainer/>}/>

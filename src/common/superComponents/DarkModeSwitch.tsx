@@ -1,9 +1,9 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks/reduxHooks";
-import {setAppThemeTC} from "../../redux/appReducer/app-reducer";
 import {faSun} from "@fortawesome/free-solid-svg-icons/faSun";
 import {faMoon} from "@fortawesome/free-solid-svg-icons/faMoon";
+import {setAppThemeTC} from "../../redux/appReducer/app-reducer";
 
 
 export const ThemeSwitch = () => {
