@@ -20,9 +20,10 @@ export const DialogsForm: FC<DialogsPropsType> = ({onSubmit}) => {
 
 
     return (
-        <PositionedComponent bottom>
+        <PositionedComponent position={"fixed"} bottom>
             <form onSubmit={handleSubmit(onSubmitHandler)} className={styles.form}>
                 <TextField width="70%"
+                           className={styles.input}
                            focus={0}
                            autocomplete="off"
                            borderRadius={"20px"}
