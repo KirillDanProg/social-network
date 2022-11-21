@@ -20,10 +20,11 @@ export const StyledProfileInfoContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: start;
-  justify-content: start;
+  justify-content: center;
   margin: auto;
   padding: 5px;
   @media ${device.tablet} {
+    justify-content: start;
     margin: 0;
   }
 `

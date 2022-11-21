@@ -60,24 +60,49 @@ export const UserInfoForm: FC<UserInfoPropsType> = ({userInfo, setEditMode}) => 
         >
             <Form>
                 <Flex gap={"10px"} direction={"column"}>
-                    <Field className={styles.infoField} id={"fullName"} name={"fullName"}
-                           placeholder={"Edit user name"}/>
+                    <span className={styles.fieldItem}>
+                         <label>User name: </label>
+                         <Field className={styles.infoField} id={"fullName"} name={"fullName"}
+                                placeholder={"Edit user name"}/>
+                    </span>
+
+                    <span className={styles.fieldItem}>
+                        <label>About me: </label>
+                        <Field className={styles.infoField} id={"aboutMe"} name={"aboutMe"}
+                               placeholder={"aboutMe"}/>
+                    </span>
+
+                    <span className={styles.fieldItem}>
+                        <label form={"lookingForAJobDescription"}>Description: </label>
+                         <Field className={styles.infoField}
+                                id={"lookingForAJobDescription"}
+                                name={"lookingForAJobDescription"}
+                                placeholder={"description"}
+                                type={"textarea"}
+                         />
+                    </span>
+
+                    <span className={styles.fieldItem}>
+                        <label form={"instagram"}>instagram: </label>
+                        <Field className={styles.infoField} id={"instagram"} name={"instagram"}
+                               placeholder={"instagram"}/>
+                    </span>
+
+                    <span className={styles.fieldItem}>
+                        <label form={"github"}>Github: </label>
+                        <Field className={styles.infoField} id={"github"} name={"github"} placeholder={"github"}/>
+                    </span>
+                    <span className={styles.fieldItem}>
+                        <label form={"vk"}>vk: </label>
+                        <Field className={styles.infoField} id={"vk"} name={"vk"} placeholder={"vk"}/>
+                    </span>
+
                     <div className={styles.checkboxField}>
                         <label htmlFor="lookingForAJob">lookingForAJob</label>
                         <Field className={styles.infoField} type={"checkbox"} id={"lookingForAJob"}
                                name={"lookingForAJob"}
                                placeholder={"lookingForAJob"}/>
                     </div>
-                    <Field className={styles.infoField} id={"aboutMe"} name={"aboutMe"} placeholder={"aboutMe"}/>
-                    <Field className={styles.infoField}
-                           id={"lookingForAJobDescription"}
-                           name={"lookingForAJobDescription"}
-                           placeholder={"description"}
-                           type={"textarea"}
-                    />
-                    <Field className={styles.infoField} id={"github"} name={"github"} placeholder={"github"}/>
-                    <Field className={styles.infoField} id={"vk"} name={"vk"} placeholder={"vk"}/>
-                    <Field className={styles.infoField} id={"instagram"} name={"instagram"} placeholder={"instagram"}/>
 
                     <div style={{display: "none"}}>
                         <Field className={styles.infoField} id={"youtube"} name={"youtube"} placeholder={"youtube"}/>
@@ -87,7 +112,7 @@ export const UserInfoForm: FC<UserInfoPropsType> = ({userInfo, setEditMode}) => 
                         <Field className={styles.infoField} id={"mainLink"} name={"mainLink"}/>
                     </div>
 
-                    <Button  type={"submit"}>Update info</Button>
+                    <Button type={"submit"}>Update info</Button>
                 </Flex>
             </Form>
         </Formik>
