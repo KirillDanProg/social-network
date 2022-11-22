@@ -15,7 +15,6 @@ export type ChatDataType = {
 }
 
 export const Dialogs = memo(() => {
-
     const dialogItems = useSelector<RootState, DialogType[]>(state => state.dialogs.dialogsData)
     const [isDialogSelected, setIsDialogSelected] = useState(false)
     const [chatData, setChatData] = useState({} as ChatDataType)

@@ -16,9 +16,8 @@ import {ProfilePage} from "./components/Profile/ProfilePage";
 import {appInit} from "./redux/appReducer/app-reducer";
 import ProfileInfoContainer from "./components/Profile/ProfileInfoContainer";
 import {Snackbar} from "./common/superComponents/Snackbar";
-import {Suspense} from "react";
+import UsersContainer from "./components/Users/UsersContainer";
 
-const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"))
 
 
 const App = () => {
@@ -36,12 +35,12 @@ const App = () => {
         } else {
             navigate("/profile")
         }
-    }, [isAuth, dispatch, navigate])
+    }, [isAuth])
 
 
     useEffect(() => {
         dispatch(appInit())
-    }, [isAuth, dispatch])
+    }, [isAuth])
 
     return !isAppInit ? <Loader/>
         :
@@ -59,9 +58,7 @@ const App = () => {
                                 <Route path={":userId"} element={<ProfilePage/>}/>
                             </Route>
                             <Route path="/dialogs" element={<Dialogs/>}/>
-                            <Route path="/users" element={<Suspense fallback={<Loader/>}>
-                                <UsersContainer/>
-                            </Suspense>}/>
+                            <Route path="/users" element={<UsersContainer/>}/>
                             <Route path="/friends" element={<Friends/>}/>
                             <Route path="/login" element={<LoginContainer/>}/>
                         </Routes>
