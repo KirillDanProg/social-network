@@ -6,7 +6,7 @@ import {setAppError} from "../../redux/appReducer/app-reducer";
 const StyledSnackBar = styled.span`
   position: absolute;
   bottom: 10px;
-  left: 10px;
+  left: 40%;
   display: inline-block;
   margin: 5px;
   padding: 10px 20px;

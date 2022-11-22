@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {device} from "../mediaqueries/media";
 
 const MainContainer = styled.div<any>`
+  position: relative;
   grid-area: 2 / 1 / 6 / 13;
   min-height: calc(100vh - 60px);
   margin: ${props => props.margin || "0 10px"};
