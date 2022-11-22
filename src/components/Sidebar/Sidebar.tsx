@@ -12,7 +12,7 @@ const StyledSidebar = styled.div<any>`
   position: relative;
   background-color: ${props => props.theme.backgroundColor};
   transition: 0.5s;
-  z-index: 2;
+  z-index: 999;
   @media ${device.tablet} {
     display: block;
   }
