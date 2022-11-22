@@ -4,6 +4,7 @@ import {ResultCode} from "../../api/api-types";
 import {AppThunk} from "../store";
 import {setAdminAccessRights} from "../accessRightsReducer/access-reducer";
 import {setAppInitializing} from "../appReducer/app-reducer";
+import {serverErrorsHandlers} from "../../utils/error-utils";
 
 export type initialAuthStateType = {
     id: number | null
@@ -61,24 +62,32 @@ export const authMeTC = (): AppThunk => async dispatch => {
     }
 }
 
-export const loginTC = (data: LoginDataType): AppThunk => dispatch => {
+export const loginTC = (data: LoginDataType): AppThunk => async dispatch => {
     dispatch(setAppInitializing(false))
-    authAPI.login(data).then(res => {
+    try {
+        const res = await authAPI.login(data)
         if (res.data.resultCode === ResultCode.Ok) {
-            authAPI.me()
-                .then(response => response.data.data)
-                .then(data => {
-                    dispatch(authMe(data.id, data.login, data.email))
-                })
+            const authRes = await authAPI.me()
+            const data = authRes.data.data
+            dispatch(authMe(data.id, data.login, data.email))
+        } else if (res.data.messages.length > 0) {
+            serverErrorsHandlers(dispatch, res.data.messages[0])
         }
-    })
+    } catch (e) {
+        serverErrorsHandlers(dispatch, e as string | Error)
+    }
 }
 
-export const logoutTC = (): AppThunk => dispatch => {
-    authAPI.logout()
-        .then(res => {
-            if (res.data.resultCode === ResultCode.Ok) {
-                dispatch(authMe(null, null, null))
-            }
-        })
+export const logoutTC = (): AppThunk => async dispatch => {
+    try {
+        const res = await authAPI.logout()
+        if (res.data.resultCode === ResultCode.Ok) {
+            dispatch(authMe(null, null, null))
+        } else if (res.data.messages.length > 0) {
+            serverErrorsHandlers(dispatch, res.data.messages[0])
+        }
+    } catch (e) {
+        serverErrorsHandlers(dispatch, e as string | Error)
+    }
+
 }

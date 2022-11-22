@@ -2,6 +2,7 @@ import {PostDataType, ProfileDataType, ProfileType} from "../../types /ProfileTy
 import {AppThunk} from "../store";
 import {profileAPI} from "../../api/profile-api";
 import {userAPI} from "../../api/users-api";
+import {serverErrorsHandlers} from "../../utils/error-utils";
 
 export type ProfileActionsType = ReturnType<typeof setProfileDataAC> |
     ReturnType<typeof getUserStatusAC>
@@ -43,15 +44,22 @@ export const setProfileDataAC = (data: ProfileDataType) => {
 
 // THUNK CREATORS
 export const getProfileDataTC = (userId: number): AppThunk => async dispatch => {
-    const data = await userAPI.getProfileData(userId)
-    const status = await dispatch(getUserStatusTC(data.userId))
-    const profileData = {...data, status}
-    dispatch(setProfileDataAC(profileData))
+    try {
+        const data = await userAPI.getProfileData(userId)
+        const status = await dispatch(getUserStatusTC(data.userId))
+        const profileData = {...data, status}
+        dispatch(setProfileDataAC(profileData))
+    } catch (e) {
+        serverErrorsHandlers(dispatch, e as string | Error)
+    }
 }
 
-export const getUserStatusTC = (id: number): AppThunk => async () => {
-    return await profileAPI.getUserStatus(id)
-
+export const getUserStatusTC = (id: number): AppThunk => async (dispatch) => {
+    try {
+        return await profileAPI.getUserStatus(id)
+    } catch (e) {
+        serverErrorsHandlers(dispatch, e as string | Error)
+    }
 }
 
 

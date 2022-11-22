@@ -5,6 +5,7 @@ import {getUserStatusTC} from "../profileReducer/profile-reducer";
 import {setAppInitializing} from "../appReducer/app-reducer";
 import {profileAPI} from "../../api/profile-api";
 import {ResultCode} from "../../api/api-types";
+import {serverErrorsHandlers} from "../../utils/error-utils";
 
 export type InitAccessStateType = typeof initialState
 export type accessStatusType = "admin" | "guest"
@@ -103,18 +104,21 @@ export const updateUserPhotoTC = (photo: File): AppThunk => async dispatch => {
             dispatch(updateUserPhotoAC(res.data.data.photos))
         }
     } catch (e) {
-        console.log(e)
+        serverErrorsHandlers(dispatch, e as string | Error)
     }
 
 }
-export const changeUserStatusTC = (status: string): AppThunk => dispatch => {
-    profileAPI.updateUserStatus(status)
-        .then(res => {
-            if (res.resultCode === ResultCode.Ok) {
-                dispatch(updateUserStatusAC(status))
-            }
-        })
-        .catch(err => console.warn(err))
+export const changeUserStatusTC = (status: string): AppThunk => async dispatch => {
+    try {
+        const res = await profileAPI.updateUserStatus(status)
+        if (res.resultCode === ResultCode.Ok) {
+            dispatch(updateUserStatusAC(status))
+        } else if (res.messages.length > 0) {
+            serverErrorsHandlers(dispatch, res.messages[0])
+        }
+    } catch (e) {
+        serverErrorsHandlers(dispatch, e as string | Error)
+    }
 }
 export type UserInfoModelType = {
     aboutMe: string
@@ -135,9 +139,14 @@ type ContactsType = {
 }
 
 export const updatePersonalData = (userInfoModel: UserInfoModelType): AppThunk => async dispatch => {
-    const res = await profileAPI.updateUserInfo(userInfoModel)
-    if (res.data.resultCode === 0) {
-        dispatch(updateUserInfo(userInfoModel))
+    try {
+        const res = await profileAPI.updateUserInfo(userInfoModel)
+        if (res.data.resultCode === 0) {
+            dispatch(updateUserInfo(userInfoModel))
+        } else if( res.data.messages.length > 0) {
+            serverErrorsHandlers(dispatch, res.data.messages[0])
+        }
+    } catch (e) {
+        serverErrorsHandlers(dispatch, e as string | Error)
     }
-
 }

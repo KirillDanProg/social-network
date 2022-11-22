@@ -1,8 +1,6 @@
 import {authMeTC} from "../authReducer/authReducer";
 import {AppThunk} from "../store";
 import {RequestStatusType} from "../../api/api-types";
-import {serverErrorsHandlers} from "../../utils/error-utils";
-import {fetchDialogsTC} from "../dialogsReducer/dialogs-reducer";
 
 const initialState = {
     status: "idle" as RequestStatusType,
@@ -95,7 +93,6 @@ export const appInit = (): AppThunk => async dispatch => {
     dispatch(getAppThemeTC())
 
     await dispatch(authMeTC())
-    await dispatch(fetchDialogsTC())
 
     dispatch(setAppInitializing(true))
 }

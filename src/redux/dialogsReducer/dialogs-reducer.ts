@@ -2,6 +2,7 @@ import {MessageDataType, MessageType, SandedMessageType} from "../../types /Dial
 import {AppThunk} from "../store";
 import {dialogsAPI} from "../../api/dialogs-api";
 import {filterUsers} from "../../utils/helpers";
+import {serverErrorsHandlers} from "../../utils/error-utils";
 
 export type DialogType = {
     id: number
@@ -119,24 +120,29 @@ export const fetchDialogsTC = (): AppThunk => async dispatch => {
         }))
 
         dispatch(fetchDialogsAC(filteredDialogs))
-    } catch (e) {
-        console.log(e)
+    } catch (err) {
+        serverErrorsHandlers(dispatch, err as string | Error)
     }
 }
 
 export const fetchMessagesTC = (id: number): AppThunk => async dispatch => {
-    const res = await dialogsAPI.fetchMessages(id)
-    if (!res.data.error) {
-        dispatch(setUserMessagesAC(id, res.data.items))
+    try {
+        const res = await dialogsAPI.fetchMessages(id)
+        if (!res.data.error) {
+            dispatch(setUserMessagesAC(id, res.data.items))
+        }
+    } catch (err) {
+        serverErrorsHandlers(dispatch, err as string | Error)
     }
+
 }
 
 export const addUserMessageTC = (id: number, message: string): AppThunk => async dispatch => {
     try {
         const res = await dialogsAPI.addUserMessage(id, message)
         dispatch(addUserMessageAC(id, res.data.data.message))
-    } catch (e) {
-        console.log(e)
+    } catch (err) {
+        serverErrorsHandlers(dispatch, err as string | Error)
     }
 }
 export const deleteUserMessageTC = (userId: number, messageId: string): AppThunk => async dispatch => {
@@ -144,9 +150,11 @@ export const deleteUserMessageTC = (userId: number, messageId: string): AppThunk
         const res = await dialogsAPI.deleteUserMessage(messageId)
         if (res.data.resultCode === 0) {
             dispatch(deleteUserMessageAC(userId, messageId))
+        } else if(res.data.messages.length > 0 ) {
+            serverErrorsHandlers(dispatch,  res.data.messages[0])
         }
-    } catch (e) {
-        console.log(e)
+    } catch (err) {
+        serverErrorsHandlers(dispatch, err as string | Error)
     }
 }
 export const refreshDialogTC = (userId: number): AppThunk => async dispatch => {
@@ -156,7 +164,7 @@ export const refreshDialogTC = (userId: number): AppThunk => async dispatch => {
             dispatch(fetchDialogsTC())
         }
 
-    } catch (e) {
-        console.log(e)
+    } catch (err) {
+        serverErrorsHandlers(dispatch, err as string | Error)
     }
 }
