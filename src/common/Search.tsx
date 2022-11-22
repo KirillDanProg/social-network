@@ -6,12 +6,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {findUserTC} from "../redux/usersReducer/users-reducer";
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
 import {Flex} from "./superComponents/Flex";
+import {Button} from "./superComponents/Button";
 
 
 export const Search = () => {
 
     const dispatch = useAppDispatch()
-
 
     const [value, setValue] = useState("")
 
@@ -20,7 +20,7 @@ export const Search = () => {
     }
 
     const onClickHandler = () => {
-        value.trim() && dispatch(findUserTC(value))
+        value.trim() &&  dispatch(findUserTC(value))
     }
     const onEnterHandler = (e: KeyboardEvent) => {
         if (e.key === "Enter" && value.trim()) {
@@ -33,19 +33,17 @@ export const Search = () => {
     }
     return (
         <Flex margin={"15px 0"} gap={"10px"}>
-            <FontAwesomeIcon
-                icon={faMagnifyingGlass} onClick={onClickHandler}/>
+            <Button onClick={onClickHandler}>
+                <FontAwesomeIcon
+                    icon={faMagnifyingGlass}/>
+            </Button>
 
             <TextField
                 border={"1px solid gray"}
                 value={value}
                 onChange={onChangeHandler}
                 onKeyDown={onEnterHandler}
-                onBlur={resetField}
-            >
-
-            </TextField>
-
+            />
             <FontAwesomeIcon icon={faXmark} onClick={resetField}/>
         </Flex>
 
