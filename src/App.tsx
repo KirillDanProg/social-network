@@ -12,10 +12,14 @@ import {StyledMainContainer} from "./common/superComponents/StyledMain";
 import {LoginContainer} from "./components/Login/LoginContainer";
 import {Header} from "./components/Header/Header";
 import {Sidebar} from "./components/Sidebar/Sidebar";
-import UsersContainer from "./components/Users/UsersContainer";
 import {ProfilePage} from "./components/Profile/ProfilePage";
 import {appInit} from "./redux/appReducer/app-reducer";
 import ProfileInfoContainer from "./components/Profile/ProfileInfoContainer";
+import {Snackbar} from "./common/superComponents/Snackbar";
+import {Suspense} from "react";
+
+const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"))
+
 
 const App = () => {
     const isAppInit = useAppSelector(state => state.application.isInit)
@@ -23,6 +27,8 @@ const App = () => {
     const isAuth = useAppSelector(state => state.auth.login)
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const error = useAppSelector(state => state.application.error)
+
 
     useEffect(() => {
         if (!isAuth) {
@@ -30,18 +36,20 @@ const App = () => {
         } else {
             navigate("/profile")
         }
-    }, [isAuth])
+    }, [isAuth, dispatch, navigate])
 
 
     useEffect(() => {
         dispatch(appInit())
-    }, [isAuth])
+    }, [isAuth, dispatch])
 
     return !isAppInit ? <Loader/>
         :
         (
             <ThemeProvider theme={themes[theme]}>
-
+                {
+                    !!error && <Snackbar error={error} failed/>
+                }
                 <StyledAppContainer className="App">
                     <Header/>
                     <Sidebar/>
@@ -51,7 +59,9 @@ const App = () => {
                                 <Route path={":userId"} element={<ProfilePage/>}/>
                             </Route>
                             <Route path="/dialogs" element={<Dialogs/>}/>
-                            <Route path="/users" element={<UsersContainer/>}/>
+                            <Route path="/users" element={<Suspense fallback={<Loader/>}>
+                                <UsersContainer/>
+                            </Suspense>}/>
                             <Route path="/friends" element={<Friends/>}/>
                             <Route path="/login" element={<LoginContainer/>}/>
                         </Routes>
