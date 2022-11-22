@@ -48,9 +48,11 @@ const StyledDialogWindow = styled.div`
   }
 `
 export const DialogWindow: FC<DialogWindowPropsType> = ({chatData, goBackToDialogs}) => {
-    const date = new Date(chatData.lastUserActivity)
+    const lastActivityDate = new Date(chatData.lastUserActivity)
     const dispatch = useAppDispatch()
     const messages = useAppSelector(state => state.dialogs.messagesData)
+
+
 
     const ref: any = useRef()
 
@@ -63,11 +65,11 @@ export const DialogWindow: FC<DialogWindowPropsType> = ({chatData, goBackToDialo
                     inline: 'nearest'
                 })
         }
-    })
+    }, [messages])
 
-    const lastSeen = `last seen ${date.getDate()}
-     ${date.toLocaleString('default', {month: 'long'})}
-     ${date.toLocaleTimeString()}
+    const lastSeen = `last seen ${lastActivityDate.getDate()}
+     ${lastActivityDate.toLocaleString('default', {month: 'long'})}
+     ${lastActivityDate.toLocaleTimeString()}
      `
     const addMessageHandler = (message: string) => {
         dispatch(addUserMessageTC(chatData.id, message))

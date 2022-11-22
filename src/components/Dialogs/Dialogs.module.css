@@ -88,3 +88,8 @@
 .form .input {
     background-color: white;
 }
+
+.defaultMessage {
+    text-align: center;
+    margin: 10px auto;
+}

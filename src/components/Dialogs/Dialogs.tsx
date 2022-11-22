@@ -43,7 +43,9 @@ export const Dialogs = memo(() => {
                     <DialogWindow chatData={chatData} goBackToDialogs={setIsDialogSelected}/>
                     :
                     <div className={styles.colDialogs}>
-                        {mappedDialogs}
+                        {mappedDialogs.length > 0
+                        ? mappedDialogs
+                        : <div className={styles.defaultMessage}>there is no any dialogs</div>}
                     </div>
             }
         </div>
