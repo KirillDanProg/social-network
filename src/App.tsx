@@ -1,23 +1,21 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import {Route, Routes, useNavigate,} from "react-router-dom";
-import {Friends} from "./components/Friends/Friends";
-import {useAppDispatch, useAppSelector} from "./common/hooks";
-import Loader from "./common/Loader/Loader";
-import {Dialogs} from "./components/Dialogs/Dialogs";
 import {ThemeProvider} from "styled-components";
 import {themes} from "./theme/themes";
-import {StyledAppContainer} from "./common/superComponents/StyledApp";
-import {StyledMainContainer} from "./common/superComponents/StyledMain";
-import {LoginContainer} from "./components/Login/LoginContainer";
-import {Header} from "./components/Header/Header";
-import {Sidebar} from "./components/Sidebar/Sidebar";
-import {ProfilePage} from "./components/Profile/ProfilePage";
+import {useAppDispatch, useAppSelector} from "./common/hooks";
 import {appInit} from "./redux/appReducer/app-reducer";
-import ProfileInfoContainer from "./components/Profile/ProfileInfoContainer";
-import {Snackbar} from "./common/superComponents/Snackbar";
-import UsersContainer from "./components/Users/UsersContainer";
-
+import {Loader, Snackbar, StyledAppContainer, StyledMainContainer} from "./common";
+import {
+    UsersContainer,
+    ProfilePage,
+    Dialogs,
+    Friends,
+    Profile,
+    LoginContainer,
+    Sidebar,
+    Header,
+} from "./components";
 
 
 const App = () => {
@@ -40,7 +38,7 @@ const App = () => {
 
     useEffect(() => {
         dispatch(appInit())
-    }, [isAuth])
+    }, [])
 
     return !isAppInit ? <Loader/>
         :
@@ -54,7 +52,7 @@ const App = () => {
                     <Sidebar/>
                     <StyledMainContainer className="AppContent">
                         <Routes>
-                            <Route path="/profile" element={<ProfileInfoContainer/>}>
+                            <Route path="/profile" element={<Profile/>}>
                                 <Route path={":userId"} element={<ProfilePage/>}/>
                             </Route>
                             <Route path="/dialogs" element={<Dialogs/>}/>
