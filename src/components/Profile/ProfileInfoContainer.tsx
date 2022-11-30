@@ -24,7 +24,7 @@ class ProfileInfoContainer extends React.PureComponent<ProfileInfoContainerProps
     }
 }
 
-export default compose<React.ComponentType>(
+export const Profile = compose<React.ComponentType>(
     withRouter,
 )(ProfileInfoContainer)
 

@@ -26,7 +26,7 @@ type MapDispatchType = {
     setTotal: (total: number) => void
 }
 
-class UsersContainer extends React.PureComponent<UsersPropsType> {
+class UsersContainerC extends React.PureComponent<UsersPropsType> {
     componentDidMount() {
         const page = this.props.users.page
         const count = this.props.users.count
@@ -64,9 +64,11 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<RootState, void, AnyAction>)
         },
     }
 }
-export  default compose<React.ComponentType>(
+
+export const UsersContainer = compose<React.ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
     WithAuthRedirect,
-)(UsersContainer)
+)(UsersContainerC)
+
 
 
