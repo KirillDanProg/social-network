@@ -37,6 +37,8 @@ const AdminProfile = memo(() => {
 
     const [editUserInfoMode, setEditMode] = useState(false)
 
+    const [photoPreview, setPhotoPreview] = useState(null)
+
     const changeStatusHandler = (status: string) => {
         dispatch(changeUserStatusTC(status))
     }
@@ -52,7 +54,7 @@ const AdminProfile = memo(() => {
                     <Avatar width={"200px"}
                             profile={"true"}
                             shape={"square"}
-                            src={photo}
+                            src={photoPreview ? JSON.stringify(photoPreview) : photo}
                     />
                     <span className={styles.editIcon} onClick={editUserInfoHandler}>
                       <FontAwesomeIcon icon={faPenToSquare}/>
@@ -68,6 +70,7 @@ const AdminProfile = memo(() => {
             <UserInfoContainer fullName={fullName}
                                editMode={editUserInfoMode}
                                setEditMode={editUserInfoHandler}
+                               setPhotoPreview={setPhotoPreview}
             />
         </StyledProfileInfoContainer>
     )

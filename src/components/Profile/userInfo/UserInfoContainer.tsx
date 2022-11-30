@@ -41,8 +41,9 @@ type UserInfoType = {
     fullName: string
     editMode: boolean
     setEditMode: () => void
+    setPhotoPreview: any
 }
-export const UserInfoContainer: FC<UserInfoType> = ({editMode, setEditMode}) => {
+export const UserInfoContainer: FC<UserInfoType> = ({editMode, setEditMode, ...props}) => {
 
     const dispatch = useAppDispatch()
 
@@ -50,6 +51,7 @@ export const UserInfoContainer: FC<UserInfoType> = ({editMode, setEditMode}) => 
 
     const updateUserPhoto = (e: ChangeEvent<HTMLInputElement>) => {
         e.target.files && dispatch(updateUserPhotoTC(e.target.files[0]))
+        e.target.files &&  props.setPhotoPreview(e.target.files[0])
     }
 
 
