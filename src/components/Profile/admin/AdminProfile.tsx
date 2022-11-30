@@ -1,15 +1,14 @@
-import React, {memo, useState} from "react";
+import React, {memo, useEffect, useState} from "react";
 import styled from "styled-components";
 import {WithAuthRedirect} from "../../../hoc/withAuthRedirect";
-import {Avatar} from "../../../common/superComponents/Avatar";
 import {useAppDispatch, useAppSelector} from "../../../utils/hooks/reduxHooks";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Flex} from "../../../common/superComponents/Flex";
-import {changeUserStatusTC} from "../../../redux/accessRightsReducer/access-reducer";
+import {device} from "../../../common/mediaqueries/media";
+import {Flex, Avatar} from "../../../common";
+import {changeUserStatusTC, setAdminAccessRights} from "../../../redux/accessRightsReducer/access-reducer";
 import {UserStatus} from "../userInfo/UserStatus";
 import {UserInfoContainer} from "../userInfo/UserInfoContainer";
 import {faPenToSquare} from "@fortawesome/free-solid-svg-icons/faPenToSquare";
-import {device} from "../../../common/mediaqueries/media";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import defaultUserImg from "../../../assets/user.png";
 import styles from "../Profile.module.css"
 
@@ -31,8 +30,11 @@ export const StyledProfileInfoContainer = styled.div`
 const AdminProfile = memo(() => {
     const dispatch = useAppDispatch()
 
+    const adminId = useAppSelector(state => state.auth.id)
+
     const fullName = useAppSelector(state => state.userAccess.personalData.fullName)
-    const photo = useAppSelector(state => state.userAccess.personalData.photos.large) || defaultUserImg
+    //todo fix img update
+    const photo = useAppSelector(state => state.userAccess.personalData.photos?.large) || defaultUserImg
     const status = useAppSelector(state => state.userAccess.personalData.status)
 
     const [editUserInfoMode, setEditMode] = useState(false)
@@ -46,6 +48,10 @@ const AdminProfile = memo(() => {
     const editUserInfoHandler = () => {
         setEditMode(!editUserInfoMode)
     }
+
+    useEffect(() => {
+        adminId && dispatch(setAdminAccessRights(adminId))
+    }, [])
 
     return (
         <StyledProfileInfoContainer>
