@@ -1,10 +1,10 @@
-import {Avatar} from "../../common/superComponents/Avatar";
+import {FC} from "react";
+import styled from "styled-components";
+import {Avatar} from "../../common";
 import {Message} from "./Message";
 import DialogsForm from "./Message/DialogsForm";
-import styled from "styled-components";
-import {FC, useEffect, useRef} from "react";
 import {addUserMessageTC, deleteUserMessageTC} from "../../redux/dialogsReducer/dialogs-reducer";
-import {useAppDispatch, useAppSelector} from "../../utils/hooks/reduxHooks";
+import {useAppDispatch, useAppSelector, useChatAutoScroll} from "../../utils/hooks";
 import {ChatDataType} from "./Dialogs";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft} from "@fortawesome/free-solid-svg-icons/faArrowLeft";
@@ -48,25 +48,12 @@ const StyledDialogWindow = styled.div`
   }
 `
 export const DialogWindow: FC<DialogWindowPropsType> = ({chatData, goBackToDialogs}) => {
-    const lastActivityDate = new Date(chatData.lastUserActivity)
     const dispatch = useAppDispatch()
     const messages = useAppSelector(state => state.dialogs.messagesData)
 
 
-
-    const ref: any = useRef()
-
-    useEffect(() => {
-        if (ref.current) {
-            ref.current.scrollIntoView(
-                {
-                    behavior: 'smooth',
-                    block: 'end',
-                    inline: 'nearest'
-                })
-        }
-    }, [messages])
-
+// todo: refactoring last seen activity
+    const lastActivityDate = new Date(chatData.lastUserActivity)
     const lastSeen = `last seen ${lastActivityDate.getDate()}
      ${lastActivityDate.toLocaleString('default', {month: 'long'})}
      ${lastActivityDate.toLocaleTimeString()}
@@ -82,6 +69,9 @@ export const DialogWindow: FC<DialogWindowPropsType> = ({chatData, goBackToDialo
     const goToPreviousPage = () => {
         goBackToDialogs(false)
     }
+
+    const ref = useChatAutoScroll(messages)
+
     return (
         <StyledDialogWindow>
             <div className={"dialogHeader"}>
@@ -92,7 +82,7 @@ export const DialogWindow: FC<DialogWindowPropsType> = ({chatData, goBackToDialo
                     <span className={"userLastActivity"}>{lastSeen}</span>
                 </div>
             </div>
-            <div className={"dialogMessagesBox"} ref={ref as any}>
+            <div className={"dialogMessagesBox"} ref={ref}>
                 {messages[String(chatData.id)].map(message => {
                     return <Message recipientPhoto={chatData.avatar}
                                     key={message.id}

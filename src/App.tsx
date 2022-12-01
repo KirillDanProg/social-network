@@ -1,11 +1,10 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
-import {Route, Routes, useNavigate,} from "react-router-dom";
+import {Route, Routes,} from "react-router-dom";
 import {ThemeProvider} from "styled-components";
 import {themes} from "./theme/themes";
-import {useAppDispatch, useAppSelector} from "./common/hooks";
-import {appInit} from "./redux/appReducer/app-reducer";
 import {Loader, Snackbar, StyledAppContainer, StyledMainContainer} from "./common";
+import {useAppInit, useAppSelector, useRedirect} from "./utils/hooks";
 import {
     UsersContainer,
     ProfilePage,
@@ -18,27 +17,15 @@ import {
 } from "./components";
 
 
-const App = () => {
+export const App = () => {
     const isAppInit = useAppSelector(state => state.application.isInit)
     const theme = useAppSelector(state => state.application.theme)
     const isAuth = useAppSelector(state => state.auth.login)
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate()
     const error = useAppSelector(state => state.application.error)
 
+    useRedirect(!!isAuth)
 
-    useEffect(() => {
-        if (!isAuth) {
-            navigate("/login")
-        } else {
-            navigate("/profile")
-        }
-    }, [isAuth])
-
-
-    useEffect(() => {
-        dispatch(appInit())
-    }, [])
+    useAppInit()
 
     return !isAppInit ? <Loader/>
         :
@@ -62,9 +49,6 @@ const App = () => {
                         </Routes>
                     </StyledMainContainer>
                 </StyledAppContainer>
-
             </ThemeProvider>
         );
 }
-
-export default App;
