@@ -1,5 +1,5 @@
 import {AnyAction, applyMiddleware, combineReducers, compose} from "redux";
-import profileReducer, {ProfileActionsType} from "./profileReducer/profile-reducer";
+import {ProfileActionsType, profileReducer} from "./profileReducer/profile-reducer";
 import {UsersActionsType, usersReducer} from "./usersReducer/users-reducer";
 import {AuthActionsType, authReducer} from "./authReducer/authReducer";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk'
