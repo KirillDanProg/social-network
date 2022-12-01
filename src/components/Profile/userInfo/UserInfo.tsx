@@ -2,7 +2,7 @@ import inst from "../../../assets/icons/instagram.svg";
 import github from "../../../assets/icons/github.svg";
 import vk from "../../../assets/icons/vk.svg";
 import {ProfileDataType} from "../../../types /ProfileType/ProfileTypes";
-import {Indicator} from "../../../common/superComponents/Indicator";
+import {Indicator} from "../../../common";
 
 
 export const UserInfo = (props: { userInfo: ProfileDataType }) => {
@@ -22,17 +22,17 @@ export const UserInfo = (props: { userInfo: ProfileDataType }) => {
             <span className={"info-item"}>{userInfo.lookingForAJobDescription}</span>
 
             <div className={"media-icons"}>
-                <a target={"_blank"}
+                <a target={"_blank"} rel="noreferrer"
                    href={userInfo.contacts && userInfo.contacts.instagram}>
-                    <img className={"icon"} src={inst}/>
+                    <img alt="instagram" className={"icon"} src={inst}/>
                 </a>
-                <a target={"_blank"}
+                <a target={"_blank"} rel="noreferrer"
                    href={userInfo.contacts && userInfo.contacts.github}>
-                    <img style={{color: "red"}} className={"icon github"} src={github}/>
+                    <img alt="github" style={{color: "red"}} className={"icon github"} src={github}/>
                 </a>
-                <a target={"_blank"}
+                <a target={"_blank"} rel="noreferrer"
                    href={userInfo.contacts && userInfo.contacts.vk}>
-                    <img className={"icon"} src={vk}/>
+                    <img alt="vk" className={"icon"} src={vk}/>
                 </a>
             </div>
         </div>
