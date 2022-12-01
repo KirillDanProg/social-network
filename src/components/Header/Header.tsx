@@ -1,19 +1,17 @@
 import React from "react";
-import styles from "./Header.module.css"
 import {NavLink} from "react-router-dom";
+import {useAppSelector} from "../../utils/hooks";
+import {DarkModeSwitch, StyledHeader, Burger} from "../../common";
+import styles from "./Header.module.css"
 import {Logout} from "../Login/Logout";
-import {ThemeSwitch} from "../../common/superComponents/DarkModeSwitch";
-import {StyledHeaderContainer} from "../../common/superComponents/StyledHeader";
-import {Burger} from "../../common/superComponents/Burger";
 import {Logo} from "./Logo";
-import {useAppSelector} from "../../common/hooks";
 
 export const Header = () => {
 
     const login = useAppSelector(state => state.auth.login)
 
     return (
-        <StyledHeaderContainer className={styles.header}>
+        <StyledHeader className={styles.header}>
             <Logo/>
             <Burger/>
             {
@@ -21,8 +19,7 @@ export const Header = () => {
                     ? <Logout/>
                     : <NavLink to={"login"}>Login</NavLink>
             }
-            <ThemeSwitch/>
-        </StyledHeaderContainer>
+            <DarkModeSwitch/>
+        </StyledHeader>
     )
 }
-

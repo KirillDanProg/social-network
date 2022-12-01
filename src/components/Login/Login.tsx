@@ -1,14 +1,11 @@
 import React from 'react';
-import {SubmitHandler, useForm} from "react-hook-form";
-import {yupResolver} from '@hookform/resolvers/yup';
-import * as yup from "yup";
 import styles from "./Login.module.css"
-import {Button} from "../../common/superComponents/Button";
-import {PositionedComponent} from "../../common/superComponents/PositionComponent";
-import {TextField} from "../../common/superComponents/TextField";
-import {useAppDispatch} from "../../utils/hooks/reduxHooks";
+import * as yup from "yup";
+import {yupResolver} from '@hookform/resolvers/yup';
+import {SubmitHandler, useForm} from "react-hook-form";
+import {Button, PositionedComponent, TextField} from "../../common";
+import {useAppDispatch} from "../../utils/hooks";
 import {loginTC} from "../../redux/authReducer/authReducer";
-
 
 export type LoginDataType = {
     email: string,
@@ -49,11 +46,10 @@ export const Login = () => {
                     <TextField type={"password"}  {...register("password",
                         {required: true, minLength: 4})} />
 
-                    {errors.password || errors.email && <span>Incorrect email or password (try to remove whitespaces)</span>}
+                    {(errors.password || errors.email) && <span>Incorrect email or password (try to remove whitespaces)</span>}
 
                     <Button padding={"10px 25px"} type="submit">Login</Button>
                 </form>
             }
         </PositionedComponent>)
 };
-

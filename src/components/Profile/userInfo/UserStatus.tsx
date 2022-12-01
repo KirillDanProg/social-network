@@ -1,6 +1,6 @@
 import styles from "../Profile.module.css";
-import EditableSpan from "../../../common/superComponents/EditableSpan";
 import {FC} from "react";
+import {EditableSpan} from "../../../common";
 
 export type UserStatusType = {
     value: string | null

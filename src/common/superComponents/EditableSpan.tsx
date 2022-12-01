@@ -44,5 +44,3 @@ export const EditableSpan: FC<EditableSpanType>= (props: any) => {
         </div>
     );
 };
-
-export default EditableSpan;

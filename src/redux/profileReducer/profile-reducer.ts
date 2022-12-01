@@ -16,7 +16,7 @@ const initialState: ProfileType = {
 }
 
 
-const profileReducer = (state: ProfileType = initialState, action: ProfileActionsType): ProfileType => {
+export const profileReducer = (state: ProfileType = initialState, action: ProfileActionsType): ProfileType => {
     switch (action.type) {
         case SET_PROFILE_DATA:
             return {...state, profileData: action.data}
@@ -61,6 +61,3 @@ export const getUserStatusTC = (id: number): AppThunk => async (dispatch) => {
         serverErrorsHandlers(dispatch, e as string | Error)
     }
 }
-
-
-export default profileReducer

@@ -1,7 +1,7 @@
 import React, {memo, useEffect, useState} from "react";
 import styled from "styled-components";
 import {WithAuthRedirect} from "../../../hoc/withAuthRedirect";
-import {useAppDispatch, useAppSelector} from "../../../utils/hooks/reduxHooks";
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks";
 import {device} from "../../../common/mediaqueries/media";
 import {Flex, Avatar} from "../../../common";
 import {changeUserStatusTC, setAdminAccessRights} from "../../../redux/accessRightsReducer/access-reducer";

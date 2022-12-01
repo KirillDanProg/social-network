@@ -1,13 +1,10 @@
 import React, {ChangeEvent, useState} from 'react';
-import {TextField} from "./superComponents/TextField";
-import {useAppDispatch} from "../utils/hooks/reduxHooks";
+import {useAppDispatch} from "../utils/hooks";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons/faMagnifyingGlass";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {findUserTC} from "../redux/usersReducer/users-reducer";
 import {faXmark} from "@fortawesome/free-solid-svg-icons/faXmark";
-import {Flex} from "./superComponents/Flex";
-import {Button} from "./superComponents/Button";
-
+import {Flex, Button, TextField} from "./superComponents";
 
 export const Search = () => {
 
@@ -20,7 +17,7 @@ export const Search = () => {
     }
 
     const onClickHandler = () => {
-        value.trim() &&  dispatch(findUserTC(value))
+        value.trim() && dispatch(findUserTC(value))
     }
     const onEnterHandler = (e: KeyboardEvent) => {
         if (e.key === "Enter" && value.trim()) {
@@ -31,6 +28,7 @@ export const Search = () => {
     const resetField = () => {
         setValue("")
     }
+
     return (
         <Flex margin={"15px 0"} gap={"10px"}>
             <Button onClick={onClickHandler}>
@@ -46,7 +44,5 @@ export const Search = () => {
             />
             <FontAwesomeIcon icon={faXmark} onClick={resetField}/>
         </Flex>
-
     );
 };
-

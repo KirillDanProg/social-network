@@ -37,13 +37,8 @@ export const Users = memo((props: UsersPropsType) => {
                                 />
                             )
                         })
-
                 }
             </div>
         </>
-
     )
 })
-
-
-

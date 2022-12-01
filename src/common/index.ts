@@ -6,7 +6,12 @@ export {
     Burger,
     Button,
     Indicator,
-    Snackbar
+    Snackbar,
+    DarkModeSwitch,
+    StyledHeader,
+    EditableSpan,
+    PositionedComponent,
+    TextField
 } from "./superComponents"
 
 export {Loader} from "./Loader"

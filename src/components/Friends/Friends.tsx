@@ -1,13 +1,13 @@
 import React, {memo, useEffect} from "react";
-import {useAppSelector} from "../../utils/hooks/reduxHooks";
-import {User} from "../Users/User";
-import {Flex} from "../../common/superComponents/Flex";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks";
+import {User} from "../Users";
+import {Flex} from "../../common";
 import {getFriendsTC} from "../../redux/usersReducer/users-reducer";
-import {useAppDispatch} from "../../common/hooks";
 
 export const Friends = memo(() => {
     const friends = useAppSelector(state => state.users.friends)
     const dispatch = useAppDispatch()
+
     useEffect(() => {
         dispatch(getFriendsTC())
     }, [])
@@ -18,13 +18,8 @@ export const Friends = memo(() => {
               gap={"10px"}
         >
             {
-                friends.map(friend => {
-                    return (
-                        <User key={friend.userId}
-                              {...friend}
-                        />
-                    )
-                })
+                friends.map(friend => <User key={friend.userId}
+                                            {...friend} />)
             }
         </Flex>
     )
