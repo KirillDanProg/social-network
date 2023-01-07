@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/KirillDanProg/social-network/static/css/main.de81791d.css",
-    "main.js": "/KirillDanProg/social-network/static/js/main.f3394c6d.js",
+    "main.js": "/KirillDanProg/social-network/static/js/main.1462ec21.js",
     "static/media/user.png": "/KirillDanProg/social-network/static/media/user.0d14c6999b4a5c8e86a7.png",
     "static/media/github.svg": "/KirillDanProg/social-network/static/media/github.f4f316804f6c468799b01fab35bd3220.svg",
     "static/media/instagram.svg": "/KirillDanProg/social-network/static/media/instagram.0d83cb47c9babff9ea717ee2c2205c3a.svg",
     "static/media/vk.svg": "/KirillDanProg/social-network/static/media/vk.3fd1e0ff1fdd6abff5fcaf342f314d22.svg",
     "index.html": "/KirillDanProg/social-network/index.html",
     "main.de81791d.css.map": "/KirillDanProg/social-network/static/css/main.de81791d.css.map",
-    "main.f3394c6d.js.map": "/KirillDanProg/social-network/static/js/main.f3394c6d.js.map"
+    "main.1462ec21.js.map": "/KirillDanProg/social-network/static/js/main.1462ec21.js.map"
   },
   "entrypoints": [
     "static/css/main.de81791d.css",
-    "static/js/main.f3394c6d.js"
+    "static/js/main.1462ec21.js"
   ]
 }
